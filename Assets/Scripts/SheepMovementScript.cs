@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 using UnityEngine;
 
 public class SheepMovementScript : MonoBehaviour
@@ -15,7 +16,7 @@ public class SheepMovementScript : MonoBehaviour
 
     public float grazingSpeed = 5f;
 
-    public float turnFrequency = 3f;
+    public float newPathFrequency = 10f;
     float time = 0.0f;
 
 
@@ -103,8 +104,18 @@ public class SheepMovementScript : MonoBehaviour
         transform.Rotate(0,90,0);
     }
 
-    void findADestination() {
-
+    void findANewDestination() {
+        // Distance the random target should be
+        float walkRadius = 100;
+        // Pick a random direction
+        Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
+        randomDirection += transform.position;
+        // Pick a random position
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
+        Vector3 finalPosition = hit.position;
+        // Send the sheep there.
+        agent.SetDestination(finalPosition);
     }
 
 
@@ -117,8 +128,8 @@ public class SheepMovementScript : MonoBehaviour
     void Start()
     {
         wolves = new GameObject[] {wolf1, wolf2, wolf3};
-        InvokeRepeating("turnOccasionally",0,2);
-        InvokeRepeating("findADestination",0,30);
+        // Occasionally find a new destination and start walking there.
+        InvokeRepeating("findANewDestination",0,newPathFrequency);
     }
 
     // Update is called once per frame
