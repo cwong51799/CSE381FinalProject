@@ -87,6 +87,13 @@ public class WolfMovementScript : MonoBehaviour
         }
     }
 
+
+    public bool isAudible() {
+        // Not audible if they are crouching or standing still.
+        return !(isCrouching || isStandingStill);
+    }
+
+    
     // Try to get this separate from frame rate with Time.deltaTime somehow.
     void handleSprinting() {
         if (Input.GetKey(KeyCode.LeftShift)) {

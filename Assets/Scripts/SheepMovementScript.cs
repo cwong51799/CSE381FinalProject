@@ -8,7 +8,18 @@ public class SheepMovementScript : MonoBehaviour
 
     public GameObject wolf1, wolf2, wolf3;
 
-    public float speed = 10f;
+    public NavMeshAgent agent;
+
+    public float audibleDistance = 10f;
+    public float runSpeed = 10f;
+
+    public float grazingSpeed = 5f;
+
+    public float turnFrequency = 3f;
+    float time = 0.0f;
+
+
+
 
     GameObject[] wolves;
 
@@ -26,10 +37,24 @@ public class SheepMovementScript : MonoBehaviour
     }
 
     bool isWolfAudible(GameObject wolf) {
-        return true;
+        float dist = Vector3.Distance(this.transform.position, wolf.transform.position);
+        if(dist < audibleDistance) {
+            return true;
+        }
+        return false;
     }
 
+
     GameObject searchForWolves() {
+        // Look first, then listen if nothing is found.
+        GameObject wolfFound = lookForWolves();
+        if (wolfFound == null) {
+            wolfFound = listenForWolves();
+        }
+        return wolfFound;
+    }
+
+    GameObject lookForWolves() {
         foreach(var wolf in wolves) {
             if (isWolfVisible(wolf)) {
                 return wolf;
@@ -41,14 +66,50 @@ public class SheepMovementScript : MonoBehaviour
     GameObject listenForWolves() {
         foreach(var wolf in wolves) {
             if (isWolfAudible(wolf)) {
-                return wolf;
+                if(wolf.GetComponent<WolfMovementScript>().isAudible()) {
+                    return wolf;
+                }
             }
         }
         return null;
     }
 
+
+    void moveForward() {
+        this.transform.position += Vector3.forward * Time.deltaTime * grazingSpeed;
+    }
+
+    void moveBackward() {
+        this.transform.position += -Vector3.forward * Time.deltaTime * grazingSpeed;
+    }
+
+    void moveLeft() {
+        this.transform.position += Vector3.left * Time.deltaTime * grazingSpeed;
+    }
+
+    void moveRight() {
+        this.transform.position += Vector3.right * Time.deltaTime * grazingSpeed;
+    }
+    
+    void graze() {
+        //moveForward();
+        moveBackward();
+        //moveLeft();
+        moveRight();
+
+    }
+
+    void turnOccasionally() {
+        transform.Rotate(0,90,0);
+    }
+
+    void findADestination() {
+
+    }
+
+
     void runAway(GameObject gameObjectToRunAwayFrom) {
-            float step =  -1 * speed * Time.deltaTime; // calculate distance to move
+            float step =  -1 * runSpeed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, gameObjectToRunAwayFrom.transform.position, step);
     }
 
@@ -56,6 +117,8 @@ public class SheepMovementScript : MonoBehaviour
     void Start()
     {
         wolves = new GameObject[] {wolf1, wolf2, wolf3};
+        InvokeRepeating("turnOccasionally",0,2);
+        InvokeRepeating("findADestination",0,30);
     }
 
     // Update is called once per frame
@@ -67,4 +130,5 @@ public class SheepMovementScript : MonoBehaviour
             runAway(wolfInSight);
         }
     }
+
 }
