@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementScript : MonoBehaviour
+public class WolfMovementScript : MonoBehaviour
 {
 
     // If this is the 1 of 3 wolves currently under control
@@ -39,6 +39,8 @@ public class MovementScript : MonoBehaviour
 
     public bool isCrouching = false;
 
+
+    public bool isStandingStill = true; 
 
     public void setUnderControl(bool controlled) {
         isUnderControl = controlled;
@@ -80,6 +82,9 @@ public class MovementScript : MonoBehaviour
         } else {
             movingSpeed = baseSpeed;
         }
+        if(isCrouching) {
+            movingSpeed = baseSpeed / 2;
+        }
     }
 
     // Try to get this separate from frame rate with Time.deltaTime somehow.
@@ -116,7 +121,9 @@ public class MovementScript : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         
+        // If you are moving
         if(direction.magnitude >= 0.1f) {
+            isStandingStill = false;
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
@@ -124,6 +131,8 @@ public class MovementScript : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * movingSpeed * Time.deltaTime);
+        } else {
+            isStandingStill = true;
         }
     }
 

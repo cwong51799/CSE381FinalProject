@@ -7,7 +7,7 @@ public class SwapWolves : MonoBehaviour
 {
     public GameObject wolf1, wolf2, wolf3;
 
-    public MovementScript wolf1movement, wolf2movement, wolf3movement;
+    public WolfMovementScript wolf1movement, wolf2movement, wolf3movement;
 
     public GameObject currentWolf;
 
@@ -50,9 +50,9 @@ public class SwapWolves : MonoBehaviour
     void Start() {
         freeLook = this.GetComponent<CinemachineFreeLook>();
         // Capture their scripts
-        wolf1movement = wolf1.GetComponent<MovementScript>();
-        wolf2movement = wolf2.GetComponent<MovementScript>();
-        wolf3movement = wolf3.GetComponent<MovementScript>();
+        wolf1movement = wolf1.GetComponent<WolfMovementScript>();
+        wolf2movement = wolf2.GetComponent<WolfMovementScript>();
+        wolf3movement = wolf3.GetComponent<WolfMovementScript>();
 
         // Set current wolf as current playable character 
         currentWolf = wolf1;
