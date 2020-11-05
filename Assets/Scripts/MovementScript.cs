@@ -137,6 +137,7 @@ public class MovementScript : MonoBehaviour
         } else {
             // Regenerate stamina passively when not in control.
             isRunning = false;
+            isCrouching = false;
             adjustStamina();
         }
     }
