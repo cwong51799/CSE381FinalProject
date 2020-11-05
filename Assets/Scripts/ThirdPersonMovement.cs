@@ -8,17 +8,100 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public Transform cam;
 
-    public float turnSmoothTime = 0.1f;
+    float turnSmoothTime = 0.1f;
 
     float turnSmoothVelocity;
 
-    public float speed;
-    // Update is called once per frame
-    // Followed from https://www.youtube.com/watch?v=4HpC--2iowE
-    void Update() {
+    public float baseSpeed = 10;
+
+    public float movingSpeed;
+    
+    // Make some of these private later on.
+
+    // Keeps track of the maximum amount of stamina
+    public double maxStamina = 100;
+
+    // Keeps track of how much stamina the player currently has.
+    public double currentStamina;
+
+    // Rates for increasing/decreasing stamina
+    public float staminaRegenRate = .01f;
+
+    public float staminaDepletionRate = .01f;
+
+    // Show different animation for crouching and running
+    public bool isRunning = false;
+
+
+    public bool isCrouching = false;
+
+    void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
+        currentStamina = maxStamina;
+        movingSpeed = baseSpeed;
+    }
+    
+
+    void regenerateStamina() {
+        currentStamina = currentStamina + staminaRegenRate;
+        if (currentStamina > maxStamina) {
+            currentStamina = maxStamina;
+        }
+    }
+
+    void depleteStamina() {
+        currentStamina = currentStamina - staminaDepletionRate;
+        if (currentStamina < 0) {
+            currentStamina = 0;
+        }
+    }
+
+    void adjustMovespeed() {
+        if(isRunning) {
+            movingSpeed = baseSpeed * 2;
+        } else {
+            movingSpeed = baseSpeed;
+        }
+    }
+
+    // Try to get this separate from frame rate with Time.deltaTime somehow.
+    void handleSprinting() {
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            // Drain through stamina to increase speed
+            // Can't run while crouching!
+            if (currentStamina > 0 && !isCrouching) {
+                isRunning = true;
+            } 
+            else {
+               isRunning = false;
+            }
+        } else {
+            // Regenerate stamina
+            isRunning = false;
+        }
+        if (isRunning) {
+            depleteStamina();
+        } else {
+            regenerateStamina();
+        }
+        adjustMovespeed();
+    }
+
+
+    void handleCrouching() {
+        if (Input.GetKey(KeyCode.C)) {
+            isCrouching = true;   
+        } else {
+            isCrouching = false;
+        }
+    }
+
+    void handleMoveDirection() {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        
         if(direction.magnitude >= 0.1f) {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -26,7 +109,17 @@ public class ThirdPersonMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * movingSpeed * Time.deltaTime);
         }
+    }
+
+    // Update is called once per frame
+    // Followed from https://www.youtube.com/watch?v=4HpC--2iowE
+    void Update() {
+
+        handleSprinting();
+        handleCrouching();
+        handleMoveDirection();
+
     }
 }
