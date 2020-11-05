@@ -7,44 +7,28 @@ public class SwapWolves : MonoBehaviour
 {
     public GameObject wolf1, wolf2, wolf3;
 
-    public WolfMovementScript wolf1movement, wolf2movement, wolf3movement;
+    GameObject[] wolves;
 
-    public GameObject currentWolf;
+    WolfMovementScript wolf1movement, wolf2movement, wolf3movement;
 
-    
+    WolfMovementScript[] wolfScripts;
+
+    GameObject currentWolf;
+
     CinemachineFreeLook freeLook;
     
 
-    void cyclePlayerControl() {
-        if(currentWolf == wolf1) {
-            // Adjust camera
-            freeLook.LookAt = wolf2.transform;
-            freeLook.Follow = wolf2.transform;
-            currentWolf = wolf2;
-
-            // Adjust control
-            wolf1movement.setUnderControl(false);
-            wolf2movement.setUnderControl(true);
-        } else if (currentWolf == wolf2) {
-            // Adjust camera
-            freeLook.LookAt = wolf3.transform;
-            freeLook.Follow = wolf3.transform;
-            currentWolf = wolf3;
-
-            // Adjust control
-            wolf2movement.setUnderControl(false);
-            wolf3movement.setUnderControl(true);
-        } else {
-            // Adjust camera
-            freeLook.LookAt = wolf1.transform;
-            freeLook.Follow = wolf1.transform;
-            currentWolf = wolf1;
-
-            // Adjust control
-            wolf3movement.setUnderControl(false);
-            wolf1movement.setUnderControl(true);
+    // Loop through all the scripts, setting the currentWolf control to true and the rest to false;
+    void setControlTo(GameObject wolf) {
+        foreach(var wolfScript in wolfScripts) {
+            if(wolfScript.gameObject == wolf) {
+                freeLook.LookAt = wolfScript.gameObject.transform;
+                freeLook.Follow = wolfScript.gameObject.transform;
+                wolfScript.setUnderControl(true);
+            } else {
+                wolfScript.setUnderControl(false);
+            }
         }
-
     }
 
     void Start() {
@@ -54,16 +38,23 @@ public class SwapWolves : MonoBehaviour
         wolf2movement = wolf2.GetComponent<WolfMovementScript>();
         wolf3movement = wolf3.GetComponent<WolfMovementScript>();
 
+        wolves = new GameObject[]{wolf1,wolf2,wolf3};
+
+        wolfScripts = new WolfMovementScript[] {wolf1movement, wolf2movement, wolf3movement};
+
         // Set current wolf as current playable character 
-        currentWolf = wolf1;
-        wolf1movement.setUnderControl(true);
+        setControlTo(wolf1);
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) {
-            cyclePlayerControl();
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            setControlTo(wolf1);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            setControlTo(wolf2);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            setControlTo(wolf3);
         }
     }
 }
