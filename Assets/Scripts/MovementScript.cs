@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThirdPersonMovement : MonoBehaviour
+public class MovementScript : MonoBehaviour
 {
+
+    // If this is the 1 of 3 wolves currently under control
+    public bool isUnderControl = false;
+
     public CharacterController controller;
 
     public Transform cam;
@@ -35,6 +39,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public bool isCrouching = false;
 
+
+    public void setUnderControl(bool controlled) {
+        isUnderControl = controlled;
+    }
+
+
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         currentStamina = maxStamina;
@@ -53,6 +63,14 @@ public class ThirdPersonMovement : MonoBehaviour
         currentStamina = currentStamina - staminaDepletionRate;
         if (currentStamina < 0) {
             currentStamina = 0;
+        }
+    }
+
+    void adjustStamina() {
+        if (isRunning) {
+            depleteStamina();
+        } else {
+            regenerateStamina();
         }
     }
 
@@ -79,11 +97,7 @@ public class ThirdPersonMovement : MonoBehaviour
             // Regenerate stamina
             isRunning = false;
         }
-        if (isRunning) {
-            depleteStamina();
-        } else {
-            regenerateStamina();
-        }
+        adjustStamina();
         adjustMovespeed();
     }
 
@@ -116,10 +130,14 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     // Followed from https://www.youtube.com/watch?v=4HpC--2iowE
     void Update() {
-
-        handleSprinting();
-        handleCrouching();
-        handleMoveDirection();
-
+        if (isUnderControl) {
+            handleSprinting();
+            handleCrouching();
+            handleMoveDirection();
+        } else {
+            // Regenerate stamina passively when not in control.
+            isRunning = false;
+            adjustStamina();
+        }
     }
 }
