@@ -34,13 +34,20 @@ public class WolfMovementScript : MonoBehaviour
     public float staminaDepletionRate = .01f;
 
     // Show different animation for crouching and running
-    public bool isRunning = false;
+    bool isRunning = false;
 
 
-    public bool isCrouching = false;
+    bool isCrouching = false;
 
 
-    public bool isStandingStill = true; 
+    bool isStandingStill = true; 
+
+    public float audibleRange = 10f;
+
+
+    public bool getCrouchingStatus() {
+        return isCrouching;
+    }
 
     public void setUnderControl(bool controlled) {
         isUnderControl = controlled;
@@ -63,8 +70,9 @@ public class WolfMovementScript : MonoBehaviour
 
     void depleteStamina() {
         currentStamina = currentStamina - staminaDepletionRate;
-        if (currentStamina < 0) {
-            currentStamina = 0;
+        if (currentStamina <= 0) {
+            // Lock the player from sprinting for a bit while this generates back to >0.
+            currentStamina = -25;
         }
     }
 

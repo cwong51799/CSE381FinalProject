@@ -30,6 +30,9 @@ public class SheepMovementScript : MonoBehaviour
 
     public float newPathFrequency = 10f;
 
+    public bool keepPathing = true;
+
+
 
     // Startling
     float startleTimer = 0f;
@@ -39,6 +42,9 @@ public class SheepMovementScript : MonoBehaviour
     bool receivingStartle = false;
 
     GameObject wolfDetected;
+
+    // CREATE A TIER LIST IN WHAT ORDER A SHEEP WOULD RUN AWAY FROM A WOLF.
+    // EX SIGHT > SOUND > STARTLE ?
 
 
     // Found here https://answers.unity.com/questions/8003/how-can-i-know-if-a-gameobject-is-seen-by-a-partic.html
@@ -55,8 +61,10 @@ public class SheepMovementScript : MonoBehaviour
     }
 
     bool isWolfAudible(GameObject wolf) {
+        WolfMovementScript wolfScript = wolf.GetComponent<WolfMovementScript>();
         float dist = Vector3.Distance(this.transform.position, wolf.transform.position);
-        if(dist < detectionRadius) {
+        // If the wolf is in audible distance and it's not crouching, return true.
+        if(dist < wolfScript.audibleRange && !wolfScript.getCrouchingStatus()) {
             return true;
         }
         return false;
@@ -140,7 +148,7 @@ public class SheepMovementScript : MonoBehaviour
 
     // Randomly pick a location on the NavMesh and set it as a location. Only do this if there is currently no wolf detected.
     void findANewDestination() {
-        if (!wolfDetected) {
+        if (!wolfDetected && keepPathing) {
             // Distance the random target should be
             float walkRadius = 200;
             // Pick a random direction
@@ -155,6 +163,10 @@ public class SheepMovementScript : MonoBehaviour
         }
     }
 
+    // A sheep will no longer look for a new location if this is set to false.
+    public void setKeepPathing(bool continuePathing) {
+        keepPathing = continuePathing;
+    }
 
     void runAway(GameObject gameObjectToRunAwayFrom) {
             float step =  -1 * runSpeed * Time.deltaTime; // calculate distance to move
