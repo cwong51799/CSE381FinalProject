@@ -7,6 +7,8 @@ public class WolfProgression : MonoBehaviour
 
     WolfMovementScript movementScript;
 
+    Predator predatorScript;
+
     public int Level1Threshold = 0;
 
     public int Level2Threshold = 1;
@@ -60,14 +62,16 @@ public class WolfProgression : MonoBehaviour
 
 
     public void checkForLevelUp() {
-        if(sheepConsumed == Level2Threshold) {
-            reachLevel2();
-        }
-        else if(sheepConsumed == Level3Threshold){
-            reachLevel3();
-        } else if (sheepConsumed == Level4Threshold){
+        if (sheepConsumed >= Level4Threshold && wolfLevel == 3){
             reachLevel4();
         }
+        else if(sheepConsumed >= Level3Threshold && wolfLevel == 2){
+            reachLevel3();
+        } 
+        else if(sheepConsumed >= Level2Threshold && wolfLevel == 1) {
+            reachLevel2();
+        }
+        
     }
 
     public int getWolfLevel() {
@@ -82,6 +86,7 @@ public class WolfProgression : MonoBehaviour
     private void Start() {
         // Grab a reference to the movement of this wolf. Will be used in upgrading.
         movementScript = this.GetComponent<WolfMovementScript>();
+        predatorScript = this.GetComponent<Predator>();
     }
 
 }

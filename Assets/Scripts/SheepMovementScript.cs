@@ -32,12 +32,14 @@ public class SheepMovementScript : MonoBehaviour
 
     public bool keepPathing = true;
 
+    public Material grazingColor;
 
+    public Material scaredColor;
 
     // Startling
     float startleTimer = 0f;
 
-    public float startleRadius = 15f;
+    public float startleRadius = 20f;
 
     bool receivingStartle = false;
 
@@ -70,6 +72,22 @@ public class SheepMovementScript : MonoBehaviour
         return false;
     }
 
+
+    void adjustColor() {
+        if (wolfDetected != null) {
+            this.GetComponent<MeshRenderer>().material = scaredColor;
+        } else {
+            this.GetComponent<MeshRenderer>().material = grazingColor;
+        }
+    }
+
+    void setAlertColor() {
+        this.GetComponent<MeshRenderer>().material = scaredColor;
+    }
+
+    void setGrazeColor() {
+        this.GetComponent<MeshRenderer>().material = grazingColor;
+    }
 
     GameObject searchForWolves() {
         // Look first, then listen if nothing is found.
@@ -168,6 +186,7 @@ public class SheepMovementScript : MonoBehaviour
         keepPathing = continuePathing;
     }
 
+    // Run in the opposite direction.
     void runAway(GameObject gameObjectToRunAwayFrom) {
             float step =  -1 * runSpeed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, gameObjectToRunAwayFrom.transform.position, step);
@@ -190,8 +209,11 @@ public class SheepMovementScript : MonoBehaviour
         }
         // Run in the opposite direction
         if (wolfDetected != null) {
+            setAlertColor();
             runAway(wolfDetected);
             startleNearbySheep(wolfDetected);
+        } else {
+            setGrazeColor();
         }
         checkForUnstartiling();
     }
