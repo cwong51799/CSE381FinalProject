@@ -51,7 +51,7 @@ public class SheepMovementScript : MonoBehaviour
 
     // Found here https://answers.unity.com/questions/8003/how-can-i-know-if-a-gameobject-is-seen-by-a-partic.html
     // Checks if the wolf is visible.
-    bool isWolfVisible(GameObject wolf) {
+    bool isWolfInFrustum(GameObject wolf) {
         var planes = GeometryUtility.CalculateFrustumPlanes(vision);
         var point = wolf.transform.position;
         foreach (var plane in planes) {
@@ -59,8 +59,25 @@ public class SheepMovementScript : MonoBehaviour
                 return false;
             }
         }
-        return true;
+        return isWolfVisible(wolf);
     }
+
+    bool isWolfVisible(GameObject wolf) {
+        // Draw a ray from the sheep towards the wolf's direction if it's in the frustum. If it is not the first 
+        // location that the ray hits, then the wolf is occluded (behind something else).
+        RaycastHit hit;
+        var rayDirection = wolf.transform.position - this.gameObject.transform.position;
+        if (Physics.Raycast (this.gameObject.transform.position, rayDirection, out hit)) {
+            if (hit.transform == wolf.transform) {
+                //Debug.Log("WOLF IS VISIBLE");
+                return true;
+            } else {
+                //Debug.Log("WOLF IS OCCLUDED");
+            }
+        }
+        return false;
+    }
+
 
     bool isWolfAudible(GameObject wolf) {
         WolfMovementScript wolfScript = wolf.GetComponent<WolfMovementScript>();
@@ -100,7 +117,7 @@ public class SheepMovementScript : MonoBehaviour
 
     GameObject lookForWolves() {
         foreach(var wolf in wolves) {
-            if (isWolfVisible(wolf)) {
+            if (isWolfInFrustum(wolf)) {
                 return wolf;
             }
         }
