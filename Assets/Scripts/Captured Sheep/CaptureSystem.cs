@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CaptureArea : MonoBehaviour
+public class CaptureSystem : MonoBehaviour
 {
     public GameObject capturedArea;
 
     public GameObject capturedSheep;
+
+    public GameObject gameSystem;
 
     int capturedSheepAgentID;
 
     int numSheepCaptured = 0;
 
 
+    public int getNumSheepCaptured() {
+        return numSheepCaptured;
+    }
 
     // Delete the Sheep and Instantiate a CapturedSheep within the constraint of the captured area
     void addToCapturedArea(GameObject freeSheep) {
