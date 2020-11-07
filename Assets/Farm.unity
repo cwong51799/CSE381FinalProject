@@ -3637,7 +3637,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307696569}
-  m_LocalRotation: {x: -0.011995953, y: 0.97929186, z: -0.06096851, w: -0.19268207}
+  m_LocalRotation: {x: -0.011995952, y: 0.97929186, z: -0.060968503, w: -0.19268207}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7159,7 +7159,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675003190}
-  m_LocalRotation: {x: -0.0049888683, y: 0.9808603, z: -0.025355535, w: -0.19299069}
+  m_LocalRotation: {x: -0.0049888664, y: 0.9808603, z: -0.025355538, w: -0.19299065}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9109,7 +9109,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -12154,22 +12154,10 @@ MonoBehaviour:
   wolf1: {fileID: 875044269}
   wolf2: {fileID: 1872173096}
   wolf3: {fileID: 1298824960}
-  Phase1Demand: 5
-  Phase1Timer: 1
-  Phase2Demand: 15
-  Phase2Timer: 2
-  Phase3Demand: 30
-  Phase3Timer: 3
-  Phase4Demand: 50
-  Phase4Timer: 4
-  Phase5Demand: 75
-  Phase5Timer: 5
-  timer: 0
-  currentPhase: 0
-  currentPhaseTimer: 0
-  currentSheepDemand: 0
-  farmerReleased: 0
-  gameEnded: 0
+  phaseLengthsInMinutes: 0.1
+  initialSheepDemand: 1
+  sheepDemandScale: 2
+  levelTimerScale: 2
 --- !u!1001 &1178962931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13462,7 +13450,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -19935,7 +19923,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3

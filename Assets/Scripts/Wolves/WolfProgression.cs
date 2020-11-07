@@ -25,7 +25,6 @@ public class WolfProgression : MonoBehaviour
 
     public float levelScaleFactor = 1.25f;
 
-    public bool isAlive = true;
 
     public int getSheepConsumed() {
         return sheepConsumed;

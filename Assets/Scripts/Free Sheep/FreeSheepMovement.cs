@@ -119,8 +119,11 @@ public class FreeSheepMovement : MonoBehaviour
 
     GameObject lookForWolves() {
         foreach(var wolf in wolves) {
-            if (isWolfInFrustum(wolf)) {
-                return wolf;
+            // Check if wolf still exists
+            if (wolf != null) {
+                if (isWolfInFrustum(wolf)) {
+                    return wolf;
+                }
             }
         }
         return null;
@@ -128,9 +131,12 @@ public class FreeSheepMovement : MonoBehaviour
 
     GameObject listenForWolves() {
         foreach(var wolf in wolves) {
-            if (isWolfAudible(wolf)) {
-                if(wolf.GetComponent<WolfMovementScript>().isAudible()) {
-                    return wolf;
+            // Check if wolf still exists
+            if (wolf != null) {
+                if (isWolfAudible(wolf)) {
+                    if(wolf.GetComponent<WolfMovementScript>().isAudible()) {
+                        return wolf;
+                    }
                 }
             }
         }

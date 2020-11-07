@@ -46,7 +46,6 @@ public class FarmerMovement : MonoBehaviour
                 script.getEaten();
                 if(hitCollider.gameObject.tag == "Wolf") {
                     // If the tag is wolf, a wolf just died. Find the next target.
-                    target.GetComponent<WolfProgression>().isAlive = false;
                     target = findNextTarget();
                     if (target) {
                         swapper.setControlTo(target);
@@ -72,8 +71,25 @@ public class FarmerMovement : MonoBehaviour
 
     GameObject lookForWolves() {
         foreach(var wolf in wolves) {
-            if (isWolfInFrustum(wolf)) {
-                return wolf;
+            // Check if it's been destroyed
+            if (wolf != null) {
+                if (isWolfInFrustum(wolf)) {
+                    return wolf;
+                }
+            }
+        }
+        return null;
+    }
+
+    
+    GameObject listenForWolves() {
+        foreach(var wolf in wolves) {
+            if (wolf != null) {
+                if (isWolfAudible(wolf)) {
+                    if(wolf.GetComponent<WolfMovementScript>().isAudible()) {
+                        return wolf;
+                    }
+                }
             }
         }
         return null;
@@ -89,16 +105,6 @@ public class FarmerMovement : MonoBehaviour
         return false;
     }
 
-    GameObject listenForWolves() {
-        foreach(var wolf in wolves) {
-            if (isWolfAudible(wolf)) {
-                if(wolf.GetComponent<WolfMovementScript>().isAudible()) {
-                    return wolf;
-                }
-            }
-        }
-        return null;
-    }
 
     bool isWolfInFrustum(GameObject wolf) {
         var planes = GeometryUtility.CalculateFrustumPlanes(vision);
@@ -131,9 +137,8 @@ public class FarmerMovement : MonoBehaviour
     // If there are no more targets available, the player loses. (If this returns null)
     GameObject findNextTarget() {
         foreach(GameObject wolf in wolves) {
-            if(wolf.GetComponent<WolfProgression>().isAlive == true) {
+            // If the wolf exists
                 return wolf;
-            }
         }
         return null;
     }
