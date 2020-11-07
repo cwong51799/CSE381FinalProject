@@ -11905,6 +11905,7 @@ MonoBehaviour:
   currentPhase: 0
   currentPhaseTimer: 0
   currentSheepDemand: 0
+  farmerReleased: 0
 --- !u!1001 &1178962931
 PrefabInstance:
   m_ObjectHideFlags: 0

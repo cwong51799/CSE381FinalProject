@@ -14,6 +14,8 @@ public class FarmersRules : MonoBehaviour
 
     public GameObject captureObject;
 
+    public GameObject farmer;
+
     CaptureSystem captureSystem;
 
     static float minutesToSeconds = 60;
@@ -44,6 +46,8 @@ public class FarmersRules : MonoBehaviour
     public float currentPhaseTimer = 0;
     
     public int currentSheepDemand = 0;
+
+    public bool farmerReleased = false;
 
     int getCurrentPhase() {
         if(timer < Phase1Timer) {
@@ -108,27 +112,52 @@ public class FarmersRules : MonoBehaviour
         updateUIPhase(5);
     }
 
+    bool pleasedTheFarmer() {
+        if (captureSystem.getNumSheepCaptured() >= currentSheepDemand) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    void updateUIForFarmer() {
+        UI_Phase.GetComponent<Text>().text = "THE FARMER IS ANGRY.";
+        UI_Timer.GetComponent<Text>().text = "RUN FROM THE FARMER.";
+        UI_Count.GetComponent<Text>().text = "CONSUME ENOUGH SHEEP TO BE ABLE TO EAT THE FARMER.";
+    }
+
+    void releaseTheFarmer() {
+        farmerReleased = true;
+        updateUIForFarmer();
+        farmer.SetActive(true);
+    }
+
     void checkForPhaseUpdate() {
         if(currentPhase != getCurrentPhase()) {
             currentPhase = getCurrentPhase();
-            switch(currentPhase) {
-                case 1:
-                    beginPhase1();
-                    break;
-                case 2:
-                    beginPhase2();
-                    break;
-                case 3:
-                    beginPhase3();
-                    break;
-                case 4:
-                    beginPhase4();
-                    break;
-                case 5:
-                    beginPhase5();
-                    break;
-                default:
-                    break;
+            if (!pleasedTheFarmer()) {
+                releaseTheFarmer();
+            } else {
+                switch(currentPhase) {
+                    case 1:
+                        beginPhase1();
+                        break;
+                    case 2:
+                        beginPhase2();
+                        break;
+                    case 3:
+                        beginPhase3();
+                        break;
+                    case 4:
+                        beginPhase4();
+                        break;
+                    case 5:
+                        beginPhase5();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -149,9 +178,14 @@ public class FarmersRules : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        checkForPhaseUpdate();
-        updateUITimeLeft();
-        updateSheepCount();
+        if (!farmerReleased) {
+            timer += Time.deltaTime;
+            checkForPhaseUpdate();
+            // If the farmer still isn't released.
+            if(!farmerReleased) {
+                updateUITimeLeft();
+                updateSheepCount();
+            }
+        }
     }
 }

@@ -15,7 +15,6 @@ public class CaptureSystem : MonoBehaviour
 
     int numSheepCaptured = 0;
 
-
     public int getNumSheepCaptured() {
         return numSheepCaptured;
     }
