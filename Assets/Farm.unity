@@ -1472,7 +1472,7 @@ Transform:
   - {fileID: 345409493}
   - {fileID: 884736184}
   m_Father: {fileID: 484742086}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &106912799 stripped
 GameObject:
@@ -3637,7 +3637,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307696569}
-  m_LocalRotation: {x: -0.011995952, y: 0.97929186, z: -0.060968503, w: -0.19268207}
+  m_LocalRotation: {x: -0.011995953, y: 0.97929186, z: -0.06096851, w: -0.19268207}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5191,6 +5191,7 @@ Transform:
   m_LocalPosition: {x: -113.46999, y: 0.54239756, z: -140.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2072656210}
   - {fileID: 1292699748}
   - {fileID: 1808978220}
   - {fileID: 106172083}
@@ -11245,7 +11246,7 @@ GameObject:
   - component: {fileID: 1123105655}
   - component: {fileID: 1123105654}
   m_Layer: 0
-  m_Name: SheepSpawner
+  m_Name: FreeSheepSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11260,11 +11261,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1123105653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9192839892efd264491274a3ac5e99ee, type: 3}
+  m_Script: {fileID: 11500000, guid: d50edbe788581b04b9cd8e29914682c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 2114670204}
-  numberOfSheep: 0
+  numberOfSheep: 5
 --- !u!4 &1123105655
 Transform:
   m_ObjectHideFlags: 0
@@ -12513,7 +12514,7 @@ GameObject:
   - component: {fileID: 1292699745}
   - component: {fileID: 1292699744}
   - component: {fileID: 1292699749}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoNotIncludeInNavMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12611,7 +12612,7 @@ Transform:
   m_LocalScale: {x: 3.5013654, y: 1, z: 5.2674537}
   m_Children: []
   m_Father: {fileID: 484742086}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1292699749
 MonoBehaviour:
@@ -12641,7 +12642,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 4e2e9539988644048bc246d9fd6b7a3c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0c412eeab03b7e94c90e900b953c28cf, type: 2}
 --- !u!1 &1296146921
 GameObject:
   m_ObjectHideFlags: 3
@@ -15417,7 +15418,6 @@ GameObject:
   - component: {fileID: 1530740318}
   - component: {fileID: 1530740317}
   - component: {fileID: 1530740316}
-  - component: {fileID: 1530740315}
   - component: {fileID: 1530740314}
   - component: {fileID: 1530740313}
   - component: {fileID: 1530740312}
@@ -15437,9 +15437,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1530740311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5382eeb1ac4c4d42b480b14abfb7b9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 78f527b1f24b3864d9f3c7c93c74e665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 1530740313}
 --- !u!195 &1530740313
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15478,31 +15479,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1530740315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530740311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbdac7276b160cd448a937e0863e5928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vision: {fileID: 1691654524}
-  wolf1: {fileID: 875044269}
-  wolf2: {fileID: 1872173096}
-  wolf3: {fileID: 1298824960}
-  agent: {fileID: 1530740313}
-  runSpeed: 20
-  detectionRadius: 10
-  grazingSpeed: 5
-  newPathFrequency: 10
-  keepPathing: 1
-  grazingColor: {fileID: 2100000, guid: 3e2c5438dd767af4d96f3c6ec2393684, type: 2}
-  scaredColor: {fileID: 2100000, guid: 2f26f8dd707476e4abb28042acba10cb, type: 2}
-  startleRadius: 20
 --- !u!65 &1530740316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18318,7 +18294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capturedArea: {fileID: 1292699743}
-  capturedSheep: {fileID: 0}
+  capturedSheep: {fileID: 1530740311}
 --- !u!23 &1808978218
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18376,11 +18352,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1808978216}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -17.74, y: 1.5376024, z: 52.21}
+  m_LocalPosition: {x: -17.96, y: 0.62, z: 52.21}
   m_LocalScale: {x: 0.86196846, y: 1, z: 0.38212004}
   m_Children: []
   m_Father: {fileID: 484742086}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!64 &1808978221
 MeshCollider:
@@ -18396,22 +18372,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!208 &1808978222
-NavMeshObstacle:
+--- !u!114 &1808978222
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1808978216}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 5, y: 0, z: 5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 20, y: 3, z: 10}
+  m_Center: {x: 0.13495827, y: 1, z: -2.1260781}
+  m_Area: 1
+  m_AffectedAgents: a98c17ec
 --- !u!1001 &1827226173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20620,6 +20596,36 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300006, guid: 11513268302b562498f3c140346b22c8, type: 3}
+--- !u!1 &2072656209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072656210}
+  m_Layer: 0
+  m_Name: CapturedSheepSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2072656210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072656209}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.62, y: 0.45, z: 25.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 484742086}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2076775214 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1323533898846632, guid: 07232b84fecc54e45b2e071b6885bb96, type: 3}

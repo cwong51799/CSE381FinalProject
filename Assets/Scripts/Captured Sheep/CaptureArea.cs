@@ -16,12 +16,13 @@ public class CaptureArea : MonoBehaviour
 
 
     // Delete the Sheep and Instantiate a CapturedSheep within the constraint of the captured area
-    void addToCapturedArea(GameObject sheep) {
-        Destroy(sheep);
+    void addToCapturedArea(GameObject freeSheep) {
+        Destroy(freeSheep);
+        Instantiate(capturedSheep, capturedArea.transform.position, Random.rotation).SetActive(true);
     }
 
-    void captureSheep(GameObject sheep) {
-        addToCapturedArea(sheep);
+    void captureSheep(GameObject freeSheep) {
+        addToCapturedArea(freeSheep);
         numSheepCaptured += 1;
     }
 
