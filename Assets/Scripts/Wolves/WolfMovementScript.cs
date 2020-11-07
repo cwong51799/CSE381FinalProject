@@ -39,7 +39,6 @@ public class WolfMovementScript : MonoBehaviour
 
     bool isCrouching = false;
 
-
     bool isStandingStill = true; 
 
     public float audibleRange = 10f;

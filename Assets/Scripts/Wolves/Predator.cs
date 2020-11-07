@@ -28,7 +28,6 @@ public class Predator : MonoBehaviour
 
                 // Consume all Prey that isn't a wolf.
                 if(preyScript && hitCollider.gameObject.tag != "Wolf") {
-                    Debug.Log(preyScript.gameObject.tag);
                     // Can only eat farmer if progression level is 4
                     if(preyScript.gameObject.tag == "Farmer" && progressionScript.getWolfLevel() == 4) {
                         // Win con
@@ -39,6 +38,7 @@ public class Predator : MonoBehaviour
                     if(hitCollider.gameObject.tag == "FreeSheep") {
                         preyScript.getEaten();
                         progressionScript.consumeASheep();
+                        gameSystem.updateWolfConsumationCount();
                     }
                 }
             }

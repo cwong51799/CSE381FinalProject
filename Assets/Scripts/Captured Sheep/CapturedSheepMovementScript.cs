@@ -26,11 +26,9 @@ public class CapturedSheepMovementScript : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
     void Start()
     {
         // Occasionally find a new destination and start walking there.
         InvokeRepeating("findANewDestination", 0, newPathFrequency);
     }
-    // Update is called once per frame
 }

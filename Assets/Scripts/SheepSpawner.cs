@@ -7,7 +7,26 @@ public class SheepSpawner : MonoBehaviour
 {
     public GameObject objectToCreate;
     
-    public int numberOfSheep = 5;
+    public int initialNumberOfSheep = 30;
+
+    public float sheepSpawnFrequency = 15;
+
+    public int amountOfSheepPerSpawn = 20;
+
+    public float MAX_AMOUNT_OF_FREE_SHEEP = 100;
+
+    // Probably have a max amount of sheep
+
+
+    // Count the amount of free sheep.
+    bool shouldSpawnSheep(){
+        GameObject[] freesheeps = GameObject.FindGameObjectsWithTag("FreeSheep");
+        if(freesheeps.Length < MAX_AMOUNT_OF_FREE_SHEEP) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     Vector3 pickARandomLocation() {
         // Pick a range
@@ -27,19 +46,24 @@ public class SheepSpawner : MonoBehaviour
         Instantiate(objectToCreate, location, Random.rotation);
     }
 
+    void spawnSheep(int amount) {
+         for (var i=0;i<amount;i++) {
+             if(!shouldSpawnSheep()) {
+                return;
+             }
+             spawnASheep();
+         }
+    }
+
+    void periodicallySpawnSheep() {
+        spawnSheep(amountOfSheepPerSpawn);
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {   
-        for (var i=0;i<numberOfSheep;i++) {
-            spawnASheep();
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        spawnSheep(initialNumberOfSheep);
+        InvokeRepeating("periodicallySpawnSheep", 0, sheepSpawnFrequency);
     }
 }

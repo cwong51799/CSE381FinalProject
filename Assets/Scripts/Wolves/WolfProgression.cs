@@ -9,23 +9,32 @@ public class WolfProgression : MonoBehaviour
 
     Predator predatorScript;
 
-    public int Level1Threshold = 0;
+    public int Level1Threshold = 5;
 
-    public int Level2Threshold = 1;
+    public int Level2Threshold = 15;
 
-    public int Level3Threshold = 2;
+    public int Level3Threshold = 50;
 
     // At level 4, the wolf can eat the farmhand. Remove the Prey script if there is one.
-    public int Level4Threshold = 3;
+    public int Level4Threshold = 75;
 
     int sheepConsumed = 0;
 
-    int wolfLevel = 1;
+    int wolfLevel = 0;
 
     public float levelScaleFactor = 1.25f;
 
     public bool isAlive = true;
 
+    public int getSheepConsumed() {
+        return sheepConsumed;
+    }
+
+    void reachLevel1() {
+        levelUpStats();
+        grow();
+        wolfLevel = 1;
+    }
     // Every level, gain increased stamina, speed, and stamina regen.
     void reachLevel2() {
         levelUpStats();
@@ -78,6 +87,9 @@ public class WolfProgression : MonoBehaviour
         } 
         else if(sheepConsumed >= Level2Threshold && wolfLevel == 1) {
             reachLevel2();
+        }
+        else if(sheepConsumed >= Level1Threshold && wolfLevel == 0) {
+            reachLevel1();
         }
         
     }

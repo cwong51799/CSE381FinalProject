@@ -14,9 +14,16 @@ public class FarmersRules : MonoBehaviour
 
     public GameObject UI_Result;
 
+    public GameObject UI_LevelInfo;
+
+    public GameObject UI_SheepConsumedInfo;
+
     public GameObject captureObject;
 
     public GameObject farmer;
+
+    public GameObject wolf1, wolf2, wolf3;
+
 
     CaptureSystem captureSystem;
 
@@ -83,7 +90,7 @@ public class FarmersRules : MonoBehaviour
 
     void updateSheepCount(){
         Text txt = UI_Count.GetComponent<Text>();
-        txt.text = $"Sheep Demanded: {captureSystem.getNumSheepCaptured()}/{currentSheepDemand}";
+        txt.text = $"Sheep Herded: {captureSystem.getNumSheepCaptured()}/{currentSheepDemand}";
     }
 
     void beginPhase1(){
@@ -124,6 +131,16 @@ public class FarmersRules : MonoBehaviour
         }
     }
 
+    void updateUILevelInfo() {
+        Text txt = UI_LevelInfo.GetComponent<Text>();
+        // Use Wolf 1 as reference for their progression, all of them should be the same.
+        WolfProgression progressionScript = wolf1.GetComponent<WolfProgression>();
+        txt.text = $"Level 1: {progressionScript.Level1Threshold} Sheep\n" +
+                   $"Level 2: {progressionScript.Level2Threshold} Sheep\n" +
+                   $"Level 3: {progressionScript.Level3Threshold} Sheep\n" + 
+                   $"Level 4: {progressionScript.Level4Threshold} Sheep\n";
+    }
+
 
     public void playerLosesTheGame() {
         UI_Result.GetComponent<Text>().text = "GAME OVER";
@@ -149,6 +166,15 @@ public class FarmersRules : MonoBehaviour
         updateUIForFarmer();
         farmer.SetActive(true);
     }
+
+    public void updateWolfConsumationCount() {
+        Text txt = UI_SheepConsumedInfo.GetComponent<Text>();
+        txt.text = $"Wolf 1: {wolf1.GetComponent<WolfProgression>().getSheepConsumed()} Consumed\n" +
+            $"Wolf 2: {wolf2.GetComponent<WolfProgression>().getSheepConsumed()} Consumed\n" +
+            $"Wolf 3: {wolf3.GetComponent<WolfProgression>().getSheepConsumed()} Consumed\n";
+    }
+
+
     void checkForPhaseUpdate() {
         if(currentPhase != getCurrentPhase()) {
             currentPhase = getCurrentPhase();
@@ -189,6 +215,7 @@ public class FarmersRules : MonoBehaviour
         Phase3Timer = Phase3Timer * minutesToSeconds;
         Phase4Timer = Phase4Timer * minutesToSeconds;
         Phase5Timer = Phase5Timer * minutesToSeconds;
+        updateUILevelInfo();
     }
 
     // Update is called once per frame

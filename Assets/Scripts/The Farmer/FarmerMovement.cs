@@ -139,7 +139,9 @@ public class FarmerMovement : MonoBehaviour
     }
 
     void huntTheWolves(){
-        agent.SetDestination(target.transform.position);
+        if(target != null) {
+            agent.SetDestination(target.transform.position);
+        }
     }
 
     // Start is called before the first frame update

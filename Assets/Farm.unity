@@ -3637,7 +3637,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307696569}
-  m_LocalRotation: {x: -0.011995952, y: 0.97929186, z: -0.060968503, w: -0.19268207}
+  m_LocalRotation: {x: -0.011995953, y: 0.97929186, z: -0.06096851, w: -0.19268207}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4535,6 +4535,92 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &429900874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429900875}
+  - component: {fileID: 429900877}
+  - component: {fileID: 429900876}
+  m_Layer: 5
+  m_Name: Level Info
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &429900875
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429900874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1053829648}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -80, y: -30}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &429900876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429900874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'Level 1: X Sheep
+
+    Level 2: Y Sheep
+
+    Level 3: Z Sheep
+
+    Level
+    4: Q Sheep'
+--- !u!222 &429900877
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429900874}
+  m_CullTransparentMesh: 0
 --- !u!1 &439098751 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1323533898846632, guid: 07232b84fecc54e45b2e071b6885bb96, type: 3}
@@ -5618,7 +5704,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Sheep Demanded: 0/X'
+  m_Text: 'Sheep Herded: 0/X'
 --- !u!222 &510208172
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8981,8 +9067,8 @@ GameObject:
   - component: {fileID: 875044270}
   - component: {fileID: 875044273}
   - component: {fileID: 875044274}
-  - component: {fileID: 875044276}
   - component: {fileID: 875044275}
+  - component: {fileID: 875044276}
   m_Layer: 9
   m_Name: Wolf 1
   m_TagString: Wolf
@@ -10832,6 +10918,8 @@ RectTransform:
   - {fileID: 1920116051}
   - {fileID: 510208170}
   - {fileID: 893371793}
+  - {fileID: 429900875}
+  - {fileID: 1942396348}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11558,7 +11646,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 2114670204}
-  numberOfSheep: 30
+  initialNumberOfSheep: 30
+  sheepSpawnFrequency: 30
+  amountOfSheepPerSpawn: 30
+  MAX_AMOUNT_OF_FREE_SHEEP: 150
 --- !u!4 &1123105655
 Transform:
   m_ObjectHideFlags: 0
@@ -12056,18 +12147,23 @@ MonoBehaviour:
   UI_Count: {fileID: 510208169}
   UI_Timer: {fileID: 1920116050}
   UI_Result: {fileID: 893371792}
+  UI_LevelInfo: {fileID: 429900874}
+  UI_SheepConsumedInfo: {fileID: 1942396347}
   captureObject: {fileID: 1808978216}
   farmer: {fileID: 1331080067}
+  wolf1: {fileID: 875044269}
+  wolf2: {fileID: 1872173096}
+  wolf3: {fileID: 1298824960}
   Phase1Demand: 5
-  Phase1Timer: 0.05
-  Phase2Demand: 20
-  Phase2Timer: 1
+  Phase1Timer: 1
+  Phase2Demand: 15
+  Phase2Timer: 2
   Phase3Demand: 30
-  Phase3Timer: 1.5
+  Phase3Timer: 3
   Phase4Demand: 50
-  Phase4Timer: 2
-  Phase5Demand: 100
-  Phase5Timer: 3
+  Phase4Timer: 4
+  Phase5Demand: 75
+  Phase5Timer: 5
   timer: 0
   currentPhase: 0
   currentPhaseTimer: 0
@@ -12545,8 +12641,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237181436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.38, z: 0.43}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalPosition: {x: -0.023, y: 0.38, z: 0.43}
+  m_LocalScale: {x: 0.8302, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 1331080068}
   m_RootOrder: 1
@@ -20466,6 +20562,89 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4934219150772252, guid: 07232b84fecc54e45b2e071b6885bb96, type: 3}
   m_PrefabInstance: {fileID: 1805982526}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1942396347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1942396348}
+  - component: {fileID: 1942396350}
+  - component: {fileID: 1942396349}
+  m_Layer: 5
+  m_Name: WolfConsumationInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1942396348
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942396347}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1053829648}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -90, y: -150}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1942396349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942396347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'Wolf 1: 0 Consumed
+
+    Wolf 2: 0 Consumed
+
+    Wolf 3: 0 Consumed'
+--- !u!222 &1942396350
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942396347}
+  m_CullTransparentMesh: 0
 --- !u!1001 &1945685281
 PrefabInstance:
   m_ObjectHideFlags: 0
