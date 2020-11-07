@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Predator : MonoBehaviour
 {
-
     WolfProgression progressionScript;
+
+    public FarmersRules gameSystem;
+
     public float eatRadius = 3f;
     // Start is called before the first frame update
 
@@ -22,11 +24,22 @@ public class Predator : MonoBehaviour
             // Search for nearby sheep
             foreach (var hitCollider in hitColliders){
                 // If it's edible, trigger the getEaten()
-                Prey sheepScript = hitCollider.gameObject.GetComponent<Prey>();
-                // Startle all nearby sheep, but not yourself (would lead to infinite loop)
-                if(sheepScript) {
-                    sheepScript.getEaten();
-                    progressionScript.consumeASheep();
+                Prey preyScript = hitCollider.gameObject.GetComponent<Prey>();
+
+                // Consume all Prey that isn't a wolf.
+                if(preyScript && hitCollider.gameObject.tag != "Wolf") {
+                    Debug.Log(preyScript.gameObject.tag);
+                    // Can only eat farmer if progression level is 4
+                    if(preyScript.gameObject.tag == "Farmer" && progressionScript.getWolfLevel() == 4) {
+                        // Win con
+                        preyScript.getEaten();
+                        gameSystem.playerWinsTheGame();
+                        gameSystem.gameEnded = true;
+                    }
+                    if(hitCollider.gameObject.tag == "FreeSheep") {
+                        preyScript.getEaten();
+                        progressionScript.consumeASheep();
+                    }
                 }
             }
         }

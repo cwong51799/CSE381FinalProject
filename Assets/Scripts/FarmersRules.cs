@@ -12,6 +12,8 @@ public class FarmersRules : MonoBehaviour
 
     public GameObject UI_Timer;
 
+    public GameObject UI_Result;
+
     public GameObject captureObject;
 
     public GameObject farmer;
@@ -48,6 +50,8 @@ public class FarmersRules : MonoBehaviour
     public int currentSheepDemand = 0;
 
     public bool farmerReleased = false;
+
+    public bool gameEnded = false;
 
     int getCurrentPhase() {
         if(timer < Phase1Timer) {
@@ -121,6 +125,19 @@ public class FarmersRules : MonoBehaviour
     }
 
 
+    public void playerLosesTheGame() {
+        UI_Result.GetComponent<Text>().text = "GAME OVER";
+        UI_Result.SetActive(true);
+        gameEnded = true;
+    }
+
+    public void playerWinsTheGame() {
+        UI_Result.GetComponent<Text>().text = "THE FARMER IS GONE. YOU WIN.";
+        UI_Result.SetActive(true);
+        gameEnded = true;
+    }
+
+
     void updateUIForFarmer() {
         UI_Phase.GetComponent<Text>().text = "THE FARMER IS ANGRY.";
         UI_Timer.GetComponent<Text>().text = "RUN FROM THE FARMER.";
@@ -132,7 +149,6 @@ public class FarmersRules : MonoBehaviour
         updateUIForFarmer();
         farmer.SetActive(true);
     }
-
     void checkForPhaseUpdate() {
         if(currentPhase != getCurrentPhase()) {
             currentPhase = getCurrentPhase();

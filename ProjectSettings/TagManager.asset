@@ -4,11 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wolf 1
-  - Wolf 2
-  - Wolf 3
   - FreeSheep
   - CapturedSheep
+  - Wolf
+  - Farmer
   layers:
   - Default
   - TransparentFX

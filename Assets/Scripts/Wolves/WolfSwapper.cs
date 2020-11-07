@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class SwapWolves : MonoBehaviour
+public class WolfSwapper : MonoBehaviour
 {
     public GameObject wolf1, wolf2, wolf3;
 
@@ -13,20 +13,20 @@ public class SwapWolves : MonoBehaviour
 
     WolfMovementScript[] wolfScripts;
 
-    GameObject currentWolf;
-
     CinemachineFreeLook freeLook;
     
 
     // Loop through all the scripts, setting the currentWolf control to true and the rest to false;
-    void setControlTo(GameObject wolf) {
-        foreach(var wolfScript in wolfScripts) {
-            if(wolfScript.gameObject == wolf) {
-                freeLook.LookAt = wolfScript.gameObject.transform;
-                freeLook.Follow = wolfScript.gameObject.transform;
-                wolfScript.setUnderControl(true);
-            } else {
-                wolfScript.setUnderControl(false);
+    public void setControlTo(GameObject wolf) {
+        if(wolf.GetComponent<WolfProgression>().isAlive) {
+            foreach(var wolfScript in wolfScripts) {
+                if(wolfScript.gameObject == wolf) {
+                    freeLook.LookAt = wolfScript.gameObject.transform;
+                    freeLook.Follow = wolfScript.gameObject.transform;
+                    wolfScript.setUnderControl(true);
+                } else {
+                    wolfScript.setUnderControl(false);
+                }
             }
         }
     }

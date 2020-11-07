@@ -15,7 +15,7 @@ public class WolfProgression : MonoBehaviour
 
     public int Level3Threshold = 2;
 
-    // At level 4, the wolf can eat the farmhand.
+    // At level 4, the wolf can eat the farmhand. Remove the Prey script if there is one.
     public int Level4Threshold = 3;
 
     int sheepConsumed = 0;
@@ -24,7 +24,7 @@ public class WolfProgression : MonoBehaviour
 
     public float levelScaleFactor = 1.25f;
 
-
+    public bool isAlive = true;
 
     // Every level, gain increased stamina, speed, and stamina regen.
     void reachLevel2() {
@@ -43,8 +43,16 @@ public class WolfProgression : MonoBehaviour
         levelUpStats();
         grow();
         wolfLevel = 4;
+        shakeOffAnyPreyComponents();
     }
 
+
+    void shakeOffAnyPreyComponents() {
+        Prey component = this.gameObject.GetComponent<Prey>();
+        if(component) {
+            Destroy(this.gameObject.GetComponent<Prey>());
+        }
+    }
 
     void grow() {
         // Make the wolf larger and louder.
