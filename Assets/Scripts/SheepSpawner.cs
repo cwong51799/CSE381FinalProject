@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class SpawnSheep : MonoBehaviour
+public class SheepSpawner : MonoBehaviour
 {
     public GameObject objectToCreate;
     

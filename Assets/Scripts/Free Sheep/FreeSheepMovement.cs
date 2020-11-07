@@ -15,7 +15,7 @@ using UnityEngine;
 3. Startled: When the sheep was alerted by a nearby sheep to run away. A sheep is in the startled state when there is a wolf detected an it is startled.
 
 */
-public class SheepMovementScript : MonoBehaviour
+public class FreeSheepMovement : MonoBehaviour
 {
     public Camera vision;
 
@@ -42,6 +42,8 @@ public class SheepMovementScript : MonoBehaviour
     public float startleRadius = 20f;
 
     bool receivingStartle = false;
+    
+
 
     GameObject wolfDetected;
 
@@ -144,7 +146,7 @@ public class SheepMovementScript : MonoBehaviour
         foreach (var hitCollider in hitColliders)
         {
             // If it has a sheep movement script, it's a sheep. Otherwise the get component will return null and the rest will not execute.
-            SheepMovementScript sheepScript = hitCollider.gameObject.GetComponent<SheepMovementScript>();
+            FreeSheepMovement sheepScript = hitCollider.gameObject.GetComponent<FreeSheepMovement>();
             // Startle all nearby sheep, but not yourself (would lead to infinite loop)
             if(sheepScript && hitCollider.gameObject != this.gameObject) {
                 sheepScript.startle(wolfDetected);
@@ -155,7 +157,7 @@ public class SheepMovementScript : MonoBehaviour
 
     // Sets the sheep's wolf detected to the original wolf for 2 seconds
     // Only startle a sheep if it wasn't currently running away from a wolf.
-    void startle(GameObject wolf) {
+    public void startle(GameObject wolf) {
         if (wolfDetected == null) {
             setWolfDetected(wolf);
             startleTimer = 2;
@@ -204,7 +206,7 @@ public class SheepMovementScript : MonoBehaviour
     }
 
     // Run in the opposite direction.
-    void runAway(GameObject gameObjectToRunAwayFrom) {
+    public void runAway(GameObject gameObjectToRunAwayFrom) {
             float step =  -1 * runSpeed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, gameObjectToRunAwayFrom.transform.position, step);
     }
@@ -228,7 +230,10 @@ public class SheepMovementScript : MonoBehaviour
         if (wolfDetected != null) {
             setAlertColor();
             runAway(wolfDetected);
-            startleNearbySheep(wolfDetected);
+            // Avoid extreme chain reactions of startling. Only the original detected sheep can startle others.
+            if (!receivingStartle) {
+                startleNearbySheep(wolfDetected);
+            }
         } else {
             setGrazeColor();
         }

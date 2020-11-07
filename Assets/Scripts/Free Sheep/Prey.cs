@@ -10,7 +10,7 @@ public class Prey : MonoBehaviour
         // Disappear and stop rendering
         this.gameObject.SetActive(false);
         this.GetComponent<Renderer>().enabled = false;
-        this.GetComponent<SheepMovementScript>().setKeepPathing(false);
+        this.GetComponent<FreeSheepMovement>().setKeepPathing(false);
     }
 
 }
