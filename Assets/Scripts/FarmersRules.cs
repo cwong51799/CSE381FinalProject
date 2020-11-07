@@ -31,31 +31,23 @@ public class FarmersRules : MonoBehaviour
     static float minutesToSeconds = 60;
 
 
-    public int Phase1SheepDemand = 5;
+    public float phaseLengthsInMinutes = 1;
 
-    // Timers are set in minutes and multiplied into seconds.
-    public float Phase1InMinutes = 2;
-    public int Phase2SheepDemand = 20;
+    public int initialSheepDemand = 5;
 
-    public float Phase2InMinutes = 1.5f;
+    float timer = 0f;
 
-    public int Phase3SheepDemand = 30;
-
-    public float Phase3InMinutes = 3;
-    public int Phase4SheepDemand = 50;
-    public float Phase4InMinutes = 5;
-
-    public int Phase5SheepDemand = 100;
-
-    public float Phase5InMinutes = 10;
-
-    float timer = 0;
-
-    int currentPhase = 0;
+    double currentPhase;
     
-    float currentPhaseTimer = 0;
+    public int sheepDemandScale = 2;
+
+
+    // A timer scale of 2 means that the player has the same amount of time as last phase to complete more sheep
+    public float levelTimerScale = 1; 
+
+    float currentPhaseTimer;
     
-    int currentSheepDemand = 0;
+    int currentSheepDemand;
 
     bool farmerReleased = false;
 
@@ -69,22 +61,18 @@ public class FarmersRules : MonoBehaviour
         gameEnded = tf;
     }
 
-    int getCurrentPhase() {
-        if(timer < Phase1InMinutes) {
-            return 1;
-        } else if(timer < Phase2InMinutes) {
-            return 2;
-        } else if(timer < Phase3InMinutes) {
-            return 3;
-        } else if(timer < Phase4InMinutes) {
-            return 4;
-        } else {
-            return 5;
-        }
+
+    double calculateCurrentPhase() {
+        return Mathf.Floor(timer/phaseLengthsInMinutes) + 1;
     }
 
 
-    void updateUIPhase(int phase) {
+    double getCurrentPhase() {
+        return calculateCurrentPhase();
+    }
+
+
+    void updateUIPhase(double phase) {
         Text txt = UI_Phase.GetComponent<Text>();
         txt.text = $"Phase {phase}";
     }
@@ -102,35 +90,12 @@ public class FarmersRules : MonoBehaviour
         txt.text = $"Sheep Herded: {captureSystem.getNumSheepCaptured()}/{currentSheepDemand}";
     }
 
-    void beginPhase1(){
-        currentPhaseTimer = Phase1InMinutes;
-        currentSheepDemand = Phase1SheepDemand;
-        updateUIPhase(1);
+    void beginNextPhase(){
+        currentPhaseTimer = currentPhaseTimer + (currentPhaseTimer * levelTimerScale);
+        currentSheepDemand = currentSheepDemand + (currentSheepDemand * sheepDemandScale);
+        updateUIPhase(currentPhase);
     }
 
-    void beginPhase2(){
-        currentPhaseTimer = Phase2InMinutes;
-        currentSheepDemand = Phase2SheepDemand;
-        updateUIPhase(2);
-    }
-
-    void beginPhase3(){
-        currentPhaseTimer = Phase3InMinutes;
-        currentSheepDemand = Phase3SheepDemand;
-        updateUIPhase(3);
-    }
-
-    void beginPhase4(){
-        currentPhaseTimer = Phase4InMinutes;
-        currentSheepDemand = Phase4SheepDemand;
-        updateUIPhase(4);
-    }
-
-    void beginPhase5(){
-        currentPhaseTimer = Phase5InMinutes;
-        currentSheepDemand = Phase5SheepDemand;
-        updateUIPhase(5);
-    }
 
     bool pleasedTheFarmer() {
         if (captureSystem.getNumSheepCaptured() >= currentSheepDemand) {
@@ -185,30 +150,12 @@ public class FarmersRules : MonoBehaviour
 
 
     void checkForPhaseUpdate() {
-        if(currentPhase != getCurrentPhase()) {
-            currentPhase = getCurrentPhase();
-            if (!pleasedTheFarmer()) {
-                releaseTheFarmer();
+        if(currentPhase != calculateCurrentPhase()) {
+            if(pleasedTheFarmer()) {
+                currentPhase = calculateCurrentPhase();
+                beginNextPhase();
             } else {
-                switch(currentPhase) {
-                    case 1:
-                        beginPhase1();
-                        break;
-                    case 2:
-                        beginPhase2();
-                        break;
-                    case 3:
-                        beginPhase3();
-                        break;
-                    case 4:
-                        beginPhase4();
-                        break;
-                    case 5:
-                        beginPhase5();
-                        break;
-                    default:
-                        break;
-                }
+                releaseTheFarmer();
             }
         }
     }
@@ -219,11 +166,11 @@ public class FarmersRules : MonoBehaviour
     {
         captureSystem = captureObject.GetComponent<CaptureSystem>();
         // Convert all the timers to seconds.
-        Phase1InMinutes = Phase1InMinutes * minutesToSeconds;
-        Phase2InMinutes = Phase2InMinutes * minutesToSeconds;
-        Phase3InMinutes = Phase3InMinutes * minutesToSeconds;
-        Phase4InMinutes = Phase4InMinutes * minutesToSeconds;
-        Phase5InMinutes = Phase5InMinutes * minutesToSeconds;
+        phaseLengthsInMinutes = phaseLengthsInMinutes * minutesToSeconds;
+        currentPhase = calculateCurrentPhase();
+        currentPhaseTimer = phaseLengthsInMinutes;
+        currentSheepDemand = initialSheepDemand;
+        updateUIPhase(1);
         updateUILevelInfo();
     }
 
