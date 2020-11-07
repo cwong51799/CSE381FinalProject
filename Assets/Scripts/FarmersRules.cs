@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+// Updates UI and keeps track of the games core rule of herding enough sheep to keep the farmer happy.
 public class FarmersRules : MonoBehaviour
 {
     public GameObject UI_Phase;
@@ -30,44 +31,52 @@ public class FarmersRules : MonoBehaviour
     static float minutesToSeconds = 60;
 
 
-    public int Phase1Demand = 5;
+    public int Phase1SheepDemand = 5;
 
     // Timers are set in minutes and multiplied into seconds.
-    public float Phase1Timer = 2;
-    public int Phase2Demand = 20;
+    public float Phase1InMinutes = 2;
+    public int Phase2SheepDemand = 20;
 
-    public float Phase2Timer = 1.5f;
+    public float Phase2InMinutes = 1.5f;
 
-    public int Phase3Demand = 30;
+    public int Phase3SheepDemand = 30;
 
-    public float Phase3Timer = 3;
-    public int Phase4Demand = 50;
-    public float Phase4Timer = 5;
+    public float Phase3InMinutes = 3;
+    public int Phase4SheepDemand = 50;
+    public float Phase4InMinutes = 5;
 
-    public int Phase5Demand = 100;
+    public int Phase5SheepDemand = 100;
 
-    public float Phase5Timer = 10;
+    public float Phase5InMinutes = 10;
 
-    public float timer = 0;
+    float timer = 0;
 
-    public int currentPhase = 0;
+    int currentPhase = 0;
     
-    public float currentPhaseTimer = 0;
+    float currentPhaseTimer = 0;
     
-    public int currentSheepDemand = 0;
+    int currentSheepDemand = 0;
 
-    public bool farmerReleased = false;
+    bool farmerReleased = false;
 
-    public bool gameEnded = false;
+    bool gameEnded = false;
+
+    public bool getGameEnded() {
+        return gameEnded;
+    }
+
+    public void setGameEnded(bool tf){
+        gameEnded = tf;
+    }
 
     int getCurrentPhase() {
-        if(timer < Phase1Timer) {
+        if(timer < Phase1InMinutes) {
             return 1;
-        } else if(timer < Phase2Timer) {
+        } else if(timer < Phase2InMinutes) {
             return 2;
-        } else if(timer < Phase3Timer) {
+        } else if(timer < Phase3InMinutes) {
             return 3;
-        } else if(timer < Phase4Timer) {
+        } else if(timer < Phase4InMinutes) {
             return 4;
         } else {
             return 5;
@@ -94,32 +103,32 @@ public class FarmersRules : MonoBehaviour
     }
 
     void beginPhase1(){
-        currentPhaseTimer = Phase1Timer;
-        currentSheepDemand = Phase1Demand;
+        currentPhaseTimer = Phase1InMinutes;
+        currentSheepDemand = Phase1SheepDemand;
         updateUIPhase(1);
     }
 
     void beginPhase2(){
-        currentPhaseTimer = Phase2Timer;
-        currentSheepDemand = Phase2Demand;
+        currentPhaseTimer = Phase2InMinutes;
+        currentSheepDemand = Phase2SheepDemand;
         updateUIPhase(2);
     }
 
     void beginPhase3(){
-        currentPhaseTimer = Phase3Timer;
-        currentSheepDemand = Phase3Demand;
+        currentPhaseTimer = Phase3InMinutes;
+        currentSheepDemand = Phase3SheepDemand;
         updateUIPhase(3);
     }
 
     void beginPhase4(){
-        currentPhaseTimer = Phase4Timer;
-        currentSheepDemand = Phase4Demand;
+        currentPhaseTimer = Phase4InMinutes;
+        currentSheepDemand = Phase4SheepDemand;
         updateUIPhase(4);
     }
 
     void beginPhase5(){
-        currentPhaseTimer = Phase5Timer;
-        currentSheepDemand = Phase5Demand;
+        currentPhaseTimer = Phase5InMinutes;
+        currentSheepDemand = Phase5SheepDemand;
         updateUIPhase(5);
     }
 
@@ -210,11 +219,11 @@ public class FarmersRules : MonoBehaviour
     {
         captureSystem = captureObject.GetComponent<CaptureSystem>();
         // Convert all the timers to seconds.
-        Phase1Timer = Phase1Timer * minutesToSeconds;
-        Phase2Timer = Phase2Timer * minutesToSeconds;
-        Phase3Timer = Phase3Timer * minutesToSeconds;
-        Phase4Timer = Phase4Timer * minutesToSeconds;
-        Phase5Timer = Phase5Timer * minutesToSeconds;
+        Phase1InMinutes = Phase1InMinutes * minutesToSeconds;
+        Phase2InMinutes = Phase2InMinutes * minutesToSeconds;
+        Phase3InMinutes = Phase3InMinutes * minutesToSeconds;
+        Phase4InMinutes = Phase4InMinutes * minutesToSeconds;
+        Phase5InMinutes = Phase5InMinutes * minutesToSeconds;
         updateUILevelInfo();
     }
 

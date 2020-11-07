@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Movement system for the wolves.
 public class WolfMovementScript : MonoBehaviour
 {
 

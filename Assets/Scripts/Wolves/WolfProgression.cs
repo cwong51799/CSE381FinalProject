@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Progression system for the wolves.
 public class WolfProgression : MonoBehaviour
 {
 

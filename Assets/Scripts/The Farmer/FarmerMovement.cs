@@ -53,7 +53,7 @@ public class FarmerMovement : MonoBehaviour
                     } else {
                         // Player loses the game
                         gameSystem.playerLosesTheGame();
-                        gameSystem.gameEnded = true;
+                        gameSystem.setGameEnded(true);
                     }
                 }
             }
@@ -150,7 +150,7 @@ public class FarmerMovement : MonoBehaviour
         target = wolf1;
         wolves = new GameObject[] {wolf1, wolf2, wolf3};
         makeTheWolvesPrey();
-        if(!gameSystem.gameEnded) {
+        if(!gameSystem.getGameEnded()) {
             InvokeRepeating("huntTheWolves", 0, updateFrequency);
         }
     }

@@ -33,7 +33,7 @@ public class Predator : MonoBehaviour
                         // Win con
                         preyScript.getEaten();
                         gameSystem.playerWinsTheGame();
-                        gameSystem.gameEnded = true;
+                        gameSystem.setGameEnded(true);
                     }
                     if(hitCollider.gameObject.tag == "FreeSheep") {
                         preyScript.getEaten();

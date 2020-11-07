@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
+
+// Script for the camera to swap between the wolves, given that the wolf is still alive.
 public class WolfSwapper : MonoBehaviour
 {
     public GameObject wolf1, wolf2, wolf3;
