@@ -146,7 +146,7 @@ public class FarmerMovement : MonoBehaviour
     }
 
     void huntTheWolves(){
-        if(target != null) {
+        if(target != null && !gameSystem.getGameEnded()) {
             agent.SetDestination(target.transform.position);
         }
     }
