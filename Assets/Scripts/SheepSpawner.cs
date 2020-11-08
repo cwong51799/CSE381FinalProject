@@ -43,7 +43,7 @@ public class SheepSpawner : MonoBehaviour
 
     void spawnASheep() {
         Vector3 location = pickARandomLocation();
-        Instantiate(objectToCreate, location, Random.rotation);
+        Instantiate(objectToCreate, location, Random.rotation).SetActive(true);
     }
 
     void spawnSheep(int amount) {

@@ -93,7 +93,7 @@ public class FreeSheepMovement : MonoBehaviour
 
 
     void adjustColor() {
-        if (wolfDetected != null) {
+        if (wolfDetected.gameObject.GetComponent<WolfProgression>().isAlive) {
             this.GetComponent<MeshRenderer>().material = scaredColor;
         } else {
             this.GetComponent<MeshRenderer>().material = grazingColor;

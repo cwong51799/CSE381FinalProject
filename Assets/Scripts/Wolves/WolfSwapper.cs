@@ -20,7 +20,7 @@ public class WolfSwapper : MonoBehaviour
 
     // Loop through all the scripts, setting the currentWolf control to true and the rest to false;
     public void setControlTo(GameObject wolf) {
-        if(wolf != null) {
+        if (wolf.gameObject.GetComponent<WolfProgression>().isAlive) {
             foreach(var wolfScript in wolfScripts) {
                 if(wolfScript.gameObject == wolf) {
                     freeLook.LookAt = wolfScript.gameObject.transform;

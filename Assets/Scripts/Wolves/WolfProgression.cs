@@ -23,6 +23,8 @@ public class WolfProgression : MonoBehaviour
 
     int wolfLevel = 0;
 
+    public bool isAlive = true;
+
     public float levelScaleFactor = 1.25f;
 
 

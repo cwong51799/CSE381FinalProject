@@ -137,8 +137,10 @@ public class FarmerMovement : MonoBehaviour
     // If there are no more targets available, the player loses. (If this returns null)
     GameObject findNextTarget() {
         foreach(GameObject wolf in wolves) {
-            // If the wolf exists
+            // If the wolf is alive
+            if (wolf.gameObject.GetComponent<WolfProgression>().isAlive) {
                 return wolf;
+            }
         }
         return null;
     }
