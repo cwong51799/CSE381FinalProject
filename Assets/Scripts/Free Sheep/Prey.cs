@@ -5,6 +5,7 @@ using UnityEngine;
 public class Prey : MonoBehaviour
 {
     public void getEaten() {
+        Debug.Log("GET EATEN CALLED.");
         // Play animation
         if(this.gameObject.tag == "FreeSheep") {
             this.gameObject.SetActive(false);
