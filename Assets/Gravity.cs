@@ -11,9 +11,14 @@ public class Gravity : MonoBehaviour
         
     }
 
+    public float fallRate = -9.8f;
     // Update is called once per frame
     void Update()
-    {
-        
+    {   
+        Debug.Log(controller.transform.position.y);
+        if(controller.transform.position.y > 0) {
+            var moveVec = new Vector3(0,fallRate,0);
+            controller.Move(moveVec*Time.deltaTime);
+        }
     }
 }
