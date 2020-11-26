@@ -37,6 +37,7 @@ public class CaptureSystem : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other) {
+        Debug.Log("COLLISION FOUND");
         if(other.gameObject.tag == "FreeSheep") {
             captureSheep(other.gameObject);
         }
