@@ -45,7 +45,6 @@ public class WolfMovementScript : MonoBehaviour
 
     public float audibleRange = 10f;
 
-
     public bool getCrouchingStatus() {
         return isCrouching;
     }
@@ -155,6 +154,7 @@ public class WolfMovementScript : MonoBehaviour
     // Update is called once per frame
     // Followed from https://www.youtube.com/watch?v=4HpC--2iowE
     void Update() {
+
         if (isUnderControl) {
             handleSprinting();
             handleCrouching();
