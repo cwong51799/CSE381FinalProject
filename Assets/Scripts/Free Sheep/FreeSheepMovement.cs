@@ -253,7 +253,6 @@ public class FreeSheepMovement : MonoBehaviour
             // Make the jumping sheep jump too and have them run away twice the amount
             if(jumpScript != null) {
                 jumpScript.jump();
-                runAway(wolfDetected);
             }
             // Avoid extreme chain reactions of startling. Only the original detected sheep can startle others.
             if (!receivingStartle) {
