@@ -23,6 +23,9 @@ public class FreeSheepMovement : MonoBehaviour
 
     GameObject[] wolves;
 
+
+    public SkinnedMeshRenderer renderer;
+
     public NavMeshAgent agent;
     public float runSpeed = 10f;
     public float detectionRadius = 10f;
@@ -101,11 +104,15 @@ public class FreeSheepMovement : MonoBehaviour
     }
 
     void setAlertColor() {
-        this.GetComponent<MeshRenderer>().material = scaredColor;
+        Material[] mats = renderer.materials;
+        mats[0] = scaredColor;
+        renderer.materials = mats;
     }
 
     void setGrazeColor() {
-        this.GetComponent<MeshRenderer>().material = grazingColor;
+        Material[] mats = renderer.materials;
+        mats[0] = grazingColor;
+        renderer.materials = mats;
     }
 
     GameObject searchForWolves() {
