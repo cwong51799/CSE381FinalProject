@@ -46,7 +46,7 @@ public class FreeSheepMovement : MonoBehaviour
 
     bool receivingStartle = false;
     
-
+    public JumpingSheepScript jumpScript;
 
     GameObject wolfDetected;
 
@@ -196,6 +196,10 @@ public class FreeSheepMovement : MonoBehaviour
         wolfDetected = wolf;
     }
 
+    public GameObject getWolfDetected() {
+        return wolfDetected;
+    }
+
     // Randomly pick a location on the NavMesh and set it as a location. Only do this if there is currently no wolf detected.
     void findANewDestination() {
         if (!wolfDetected && keepPathing) {
@@ -212,6 +216,9 @@ public class FreeSheepMovement : MonoBehaviour
             agent.SetDestination(finalPosition);
         }
     }
+
+
+
 
     // A sheep will no longer look for a new location if this is set to false.
     public void setKeepPathing(bool continuePathing) {
@@ -240,9 +247,14 @@ public class FreeSheepMovement : MonoBehaviour
             wolfDetected = searchForWolves();
         }
         // Run in the opposite direction
-        if (wolfDetected != null) {
+        if (wolfDetected != null) { 
             setAlertColor();
             runAway(wolfDetected);
+            // Make the jumping sheep jump too and have them run away twice the amount
+            if(jumpScript != null) {
+                jumpScript.jump();
+                runAway(wolfDetected);
+            }
             // Avoid extreme chain reactions of startling. Only the original detected sheep can startle others.
             if (!receivingStartle) {
                 startleNearbySheep(wolfDetected);
