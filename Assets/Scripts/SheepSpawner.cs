@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class SheepSpawner : MonoBehaviour
 {
-    public GameObject objectToCreate;
+    public GameObject plainSheepToCreate;
     
+    public GameObject jumpingSheepToCreate;
+
     public int initialNumberOfSheep = 30;
+
+    public int initialNumberOfJumpingSheep = 5;
 
     public float sheepSpawnFrequency = 15;
 
-    public int amountOfSheepPerSpawn = 20;
+    public int amountOfPlainSheepPerSpawn = 20;
+
+    public int amountOfJumpingSheepPerSpawn = 5;
 
     public float MAX_AMOUNT_OF_FREE_SHEEP = 100;
 
@@ -42,29 +48,43 @@ public class SheepSpawner : MonoBehaviour
     }
 
 
-    void spawnASheep() {
+    void spawnASheep(GameObject sheepToSpawn) {
         Vector3 location = pickARandomLocation();
-        Instantiate(objectToCreate, location, Random.rotation).SetActive(true);
+        Instantiate(sheepToSpawn, location, Random.rotation).SetActive(true);
     }
 
-    void spawnSheep(int amount) {
+
+
+    void spawnPlainSheep(int amount) {
          for (var i=0;i<amount;i++) {
              if(!shouldSpawnSheep()) {
                 return;
              }
-             spawnASheep();
+             spawnASheep(plainSheepToCreate);
          }
     }
 
+    void spawnJumpingSheep(int amount) {
+        for (var i=0;i<amount;i++) {
+             if(!shouldSpawnSheep()) {
+                return;
+             }
+             spawnASheep(jumpingSheepToCreate);
+         }
+    }
+
+
     void periodicallySpawnSheep() {
-        spawnSheep(amountOfSheepPerSpawn);
+        spawnPlainSheep(amountOfPlainSheepPerSpawn);
+        spawnJumpingSheep(amountOfJumpingSheepPerSpawn);
     }
 
 
     // Start is called before the first frame update
     void Start()
     {   
-        spawnSheep(initialNumberOfSheep);
+        spawnPlainSheep(initialNumberOfSheep);
+        spawnJumpingSheep(initialNumberOfJumpingSheep);
         InvokeRepeating("periodicallySpawnSheep", 0, sheepSpawnFrequency);
     }
 }

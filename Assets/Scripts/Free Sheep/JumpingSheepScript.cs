@@ -16,7 +16,7 @@ public class JumpingSheepScript : MonoBehaviour
     public void jump(){
         controller.enabled = true;
         if(controller.isGrounded == true) {
-            verticalVelocity = 14;
+            verticalVelocity = 30;
         }
     }
 
@@ -30,6 +30,7 @@ public class JumpingSheepScript : MonoBehaviour
     }
 
     void checkForReturnToGraze(){
+        // Timer for returning to grazing after jumping
         if(timeBeforeReturnToGraze > 0) {
             timeBeforeReturnToGraze -= Time.deltaTime;
         } else {
