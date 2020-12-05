@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Prey : MonoBehaviour
 {
-    public void getEaten() {
+    public void getEaten() {    
         // Play animation
         if(this.gameObject.tag == "FreeSheep") {
             this.gameObject.SetActive(false);
