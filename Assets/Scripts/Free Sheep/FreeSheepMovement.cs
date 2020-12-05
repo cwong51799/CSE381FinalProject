@@ -24,7 +24,7 @@ public class FreeSheepMovement : MonoBehaviour
     GameObject[] wolves;
 
 
-    public SkinnedMeshRenderer renderer;
+    public new SkinnedMeshRenderer renderer;
 
     public NavMeshAgent agent;
     public float runSpeed = 10f;

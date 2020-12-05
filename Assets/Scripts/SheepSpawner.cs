@@ -50,7 +50,9 @@ public class SheepSpawner : MonoBehaviour
 
     void spawnASheep(GameObject sheepToSpawn) {
         Vector3 location = pickARandomLocation();
-        Instantiate(sheepToSpawn, location, Random.rotation).SetActive(true);
+        GameObject newSheep = Instantiate(sheepToSpawn, location, Random.rotation);
+        newSheep.GetComponent<TargettingBeamScript>().targettingBeam.SetActive(false);
+        newSheep.SetActive(true);
     }
 
 
