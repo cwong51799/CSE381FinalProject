@@ -8,6 +8,7 @@ TagManager:
   - CapturedSheep
   - Wolf
   - Farmer
+  - sheepNoise
   layers:
   - Default
   - TransparentFX

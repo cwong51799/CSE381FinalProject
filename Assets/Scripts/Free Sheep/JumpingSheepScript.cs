@@ -6,6 +6,11 @@ public class JumpingSheepScript : MonoBehaviour
 {
     public CharacterController controller;
 
+    public GameObject soundSystem;
+
+    public SoundContainer sounds;
+
+
     float verticalVelocity = 0;
 
     float gravity = 9.8f;
@@ -17,6 +22,7 @@ public class JumpingSheepScript : MonoBehaviour
         controller.enabled = true;
         if(controller.isGrounded == true) {
             verticalVelocity = 30;
+            sounds.jumpingSound.Play();
         }
     }
 

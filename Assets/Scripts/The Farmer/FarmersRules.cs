@@ -28,6 +28,9 @@ public class FarmersRules : MonoBehaviour
 
     CaptureSystem captureSystem;
 
+
+    public SoundContainer sounds;
+
     static float minutesToSeconds = 60;
 
 
@@ -91,6 +94,7 @@ public class FarmersRules : MonoBehaviour
     }
 
     void beginNextPhase(){
+        sounds.newPhaseSound.Play();
         currentPhaseTimer = currentPhaseTimer + (currentPhaseTimer * levelTimerScale);
         currentSheepDemand = currentSheepDemand + Mathf.FloorToInt(currentSheepDemand * sheepDemandScale);
         updateUIPhase(currentPhase);

@@ -27,6 +27,7 @@ public class WolfProgression : MonoBehaviour
 
     public float levelScaleFactor = 1.25f;
 
+    public SoundContainer sounds;
 
     public int getSheepConsumed() {
         return sheepConsumed;
@@ -77,6 +78,7 @@ public class WolfProgression : MonoBehaviour
         movementScript.maxStamina = movementScript.maxStamina * levelScaleFactor;
         movementScript.baseSpeed = movementScript.baseSpeed * levelScaleFactor;
         movementScript.staminaRegenRate = movementScript.staminaRegenRate * levelScaleFactor;
+        sounds.levelUpSound.Play();
     }
 
 

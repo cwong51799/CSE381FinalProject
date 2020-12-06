@@ -11,6 +11,9 @@ public class CaptureSystem : MonoBehaviour
 
     public GameObject gameSystem;
 
+    public SoundContainer sounds;
+
+
     int capturedSheepAgentID;
 
     int numSheepCaptured = 0;
@@ -26,6 +29,7 @@ public class CaptureSystem : MonoBehaviour
     }
 
     void captureSheep(GameObject freeSheep) {
+        sounds.captureSound.Play();
         addToCapturedArea(freeSheep);
         numSheepCaptured += 1;
     }
