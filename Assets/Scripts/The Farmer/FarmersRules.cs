@@ -39,7 +39,7 @@ public class FarmersRules : MonoBehaviour
 
     double currentPhase;
     
-    public int sheepDemandScale = 2;
+    public float sheepDemandScale = 2;
 
 
     // A timer scale of 2 means that the player has the same amount of time as last phase to complete more sheep
@@ -92,7 +92,7 @@ public class FarmersRules : MonoBehaviour
 
     void beginNextPhase(){
         currentPhaseTimer = currentPhaseTimer + (currentPhaseTimer * levelTimerScale);
-        currentSheepDemand = currentSheepDemand + (currentSheepDemand * sheepDemandScale);
+        currentSheepDemand = currentSheepDemand + Mathf.FloorToInt(currentSheepDemand * sheepDemandScale);
         updateUIPhase(currentPhase);
     }
 
