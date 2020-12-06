@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 // Updates UI and keeps track of the games core rule of herding enough sheep to keep the farmer happy.
 public class FarmersRules : MonoBehaviour
@@ -18,6 +18,8 @@ public class FarmersRules : MonoBehaviour
     public GameObject UI_LevelInfo;
 
     public GameObject UI_SheepConsumedInfo;
+
+    public TextMeshPro UI_CaptureCount;
 
     public GameObject captureObject;
 
@@ -91,6 +93,7 @@ public class FarmersRules : MonoBehaviour
     void updateSheepCount(){
         Text txt = UI_Count.GetComponent<Text>();
         txt.text = $"Sheep Herded: {captureSystem.getNumSheepCaptured()}/{currentSheepDemand}";
+        UI_CaptureCount.text = $"{captureSystem.getNumSheepCaptured()}/{currentSheepDemand}";
     }
 
     void beginNextPhase(){
@@ -139,9 +142,11 @@ public class FarmersRules : MonoBehaviour
         UI_Phase.GetComponent<Text>().text = "THE FARMER IS ANGRY.";
         UI_Timer.GetComponent<Text>().text = "RUN FROM THE FARMER.";
         UI_Count.GetComponent<Text>().text = "CONSUME ENOUGH SHEEP TO BE ABLE TO EAT THE FARMER.";
+        UI_CaptureCount.text = "THE FARMER IS ANGRY.";
     }
 
     void releaseTheFarmer() {
+        sounds.farmerSoundtrack.Play();
         farmerReleased = true;
         updateUIForFarmer();
         farmer.SetActive(true);

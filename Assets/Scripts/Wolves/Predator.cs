@@ -9,6 +9,8 @@ public class Predator : MonoBehaviour
 
     public FarmersRules gameSystem;
 
+    public SoundContainer sounds;   
+
     public float eatRadius = 3f;
     // Start is called before the first frame update
 
@@ -37,6 +39,8 @@ public class Predator : MonoBehaviour
                         gameSystem.setGameEnded(true);
                     }
                     if(hitCollider.gameObject.tag == "FreeSheep") {
+                        // Play sheep consume sound;
+                        sounds.sheepConsumeSound.Play();
                         preyScript.getEaten();
                         progressionScript.consumeASheep();
                         gameSystem.updateWolfConsumationCount();

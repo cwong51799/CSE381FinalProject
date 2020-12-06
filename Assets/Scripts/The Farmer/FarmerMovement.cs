@@ -25,6 +25,9 @@ public class FarmerMovement : MonoBehaviour
 
     public FarmersRules gameSystem;
 
+    public SoundContainer sounds;
+
+
     void makeTheWolvesPrey() {
         foreach(GameObject wolf in wolves) {
             // If a wolf is level 4, it CANNOT be killed.
@@ -46,6 +49,7 @@ public class FarmerMovement : MonoBehaviour
                 script.getEaten();
                 if(hitCollider.gameObject.tag == "Wolf") {
                     // If the tag is wolf, a wolf just died. Find the next target.
+                    sounds.wolfDeathSound.Play();
                     target = findNextTarget();
                     if (target) {
                         swapper.setControlTo(target);

@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class Bark : MonoBehaviour
 {
+
+    public SoundContainer sounds;
+
+
     public float barkSoundRadius = 20f;
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.F)) { 
             Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, barkSoundRadius);
+            // Play bark sound
+            if (!sounds.barkSound.isPlaying){
+                sounds.barkSound.Play();
+            }
             // Search for nearby sheep
             foreach (var hitCollider in hitColliders){
                 // If it's edible, trigger the getEaten()

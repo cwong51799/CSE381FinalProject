@@ -9,14 +9,12 @@ public class Prey : MonoBehaviour
     public void getEaten() {    
         // Play animation
         if(this.gameObject.tag == "FreeSheep") {
-            sounds.sheepConsumeSound.Play();
             this.gameObject.SetActive(false);
             this.gameObject.GetComponent<FreeSheepMovement>().keepPathing = false;
         }
         if(this.gameObject.tag == "Wolf") {
             WolfProgression script = this.gameObject.GetComponent<WolfProgression>();
             script.isAlive = false;
-            sounds.wolfDeathSound.Play();
             this.gameObject.SetActive(false);
         }
         // Disappear and stop rendering. Can check if a wolf is alive based on if != null

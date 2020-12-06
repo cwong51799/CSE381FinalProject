@@ -20,4 +20,7 @@ public class SoundContainer : MonoBehaviour
 
     public AudioSource newPhaseSound;
 
+    public AudioSource farmerSoundtrack;
+
+    public AudioSource barkSound;
 }
