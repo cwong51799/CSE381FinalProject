@@ -77,8 +77,9 @@ public class SheepSpawner : MonoBehaviour
 
 
     void periodicallySpawnSheep() {
-        spawnPlainSheep(amountOfPlainSheepPerSpawn);
         spawnJumpingSheep(amountOfJumpingSheepPerSpawn);
+        spawnPlainSheep(amountOfPlainSheepPerSpawn);
+
     }
 
 

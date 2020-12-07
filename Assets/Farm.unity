@@ -3935,7 +3935,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307696569}
-  m_LocalRotation: {x: 0.062099777, y: -0.034745015, z: 0.0021631462, w: 0.9974627}
+  m_LocalRotation: {x: 0.062099773, y: -0.034745015, z: 0.0021631462, w: 0.9974627}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7616,7 +7616,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 652437741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243b505e31565954abb8365d9e4565fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b5d1d7036505bb4a85b6929a23d60b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jumpingSound: {fileID: 1467203177}
@@ -8141,7 +8141,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675003190}
-  m_LocalRotation: {x: 0.02582601, y: -0.03480067, z: 0.0008996082, w: 0.99906015}
+  m_LocalRotation: {x: 0.02582601, y: -0.034800638, z: 0.0008996073, w: 0.99906015}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8175,7 +8175,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 685651599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99eaeac088f74c743ae3b2b941ae63d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 022271daf1210034bb23d3985a499c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Level1Threshold: 5
@@ -14524,7 +14524,7 @@ GameObject:
   - component: {fileID: 1176949401}
   - component: {fileID: 1176949405}
   m_Layer: 0
-  m_Name: The Barn
+  m_Name: Game Brain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14635,7 +14635,7 @@ MonoBehaviour:
   wolf3: {fileID: 1201878234}
   progressionScript: {fileID: 685651600}
   sounds: {fileID: 652437742}
-  phaseLengthsInMinutes: 0.01
+  phaseLengthsInMinutes: 1
   initialSheepDemand: 5
   sheepDemandScale: 1.5
   levelTimerScale: 1.25

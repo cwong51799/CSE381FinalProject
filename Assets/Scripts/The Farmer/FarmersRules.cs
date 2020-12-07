@@ -144,7 +144,8 @@ public class FarmersRules : MonoBehaviour
         UI_Phase.GetComponent<Text>().text = "THE FARMER IS ANGRY.";
         UI_Timer.GetComponent<Text>().text = "RUN FROM THE FARMER.";
         UI_Count.GetComponent<Text>().text = "CONSUME ENOUGH SHEEP TO BE ABLE TO EAT THE FARMER.";
-        UI_CaptureCount.text = "THE FARMER IS ANGRY.";
+        UI_CaptureCount.text = "THE FARMER WANTS BLOOD.";
+        UI_CaptureCount.color = new Color32(50,0,0,255);
     }
 
     void releaseTheFarmer() {
@@ -152,10 +153,10 @@ public class FarmersRules : MonoBehaviour
         farmerReleased = true;
         updateUIForFarmer();
         farmer.SetActive(true);
-        releaseHelper1();
+        releaseHelper();
     }
 
-    void releaseHelper1() {
+    void releaseHelper() {
         farmerHelper1.SetActive(true);
     }
 
