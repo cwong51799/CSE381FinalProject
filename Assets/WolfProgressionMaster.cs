@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Progression system for the wolves.
-public class WolfProgression : MonoBehaviour
+public class WolfProgressionMaster : MonoBehaviour
 {
 
-    WolfMovementScript movementScript;
-
-    Predator predatorScript;
+    GameObject[] wolves;
 
     public int Level1Threshold = 5;
 
@@ -22,8 +20,6 @@ public class WolfProgression : MonoBehaviour
     int sheepConsumed = 0;
 
     int wolfLevel = 0;
-
-    public bool isAlive = true;
 
     public float levelScaleFactor = 1.25f;
 
@@ -58,7 +54,6 @@ public class WolfProgression : MonoBehaviour
         shakeOffAnyPreyComponents();
     }
 
-
     void shakeOffAnyPreyComponents() {
         Prey component = this.gameObject.GetComponent<Prey>();
         if(component) {
@@ -67,18 +62,24 @@ public class WolfProgression : MonoBehaviour
     }
 
     void grow() {
-        // Make the wolf larger and louder.
-        this.gameObject.transform.localScale += new Vector3(.25f,.25f,.25f);
-        this.gameObject.transform.position += new Vector3(0,-.25f,0);
-        movementScript.audibleRange = movementScript.audibleRange * levelScaleFactor;
+        foreach(GameObject wolf in wolves) {
+            WolfMovementScript movementScript = wolf.GetComponent<WolfMovementScript>();
+            // Make the wolf larger and louder.
+            wolf.gameObject.transform.localScale += new Vector3(.25f,.25f,.25f);
+            wolf.gameObject.transform.position += new Vector3(0,-.25f,0);
+            movementScript.audibleRange = movementScript.audibleRange * levelScaleFactor;
+        }
     }
 
     // Level up stats
     void levelUpStats() {
-        movementScript.maxStamina = movementScript.maxStamina * levelScaleFactor;
-        movementScript.baseSpeed = movementScript.baseSpeed * levelScaleFactor;
-        movementScript.staminaRegenRate = movementScript.staminaRegenRate * levelScaleFactor;
-        sounds.levelUpSound.Play();
+        foreach(GameObject wolf in wolves) {
+            WolfMovementScript movementScript = wolf.GetComponent<WolfMovementScript>();
+            movementScript.maxStamina = movementScript.maxStamina * levelScaleFactor;
+            movementScript.baseSpeed = movementScript.baseSpeed * levelScaleFactor;
+            movementScript.staminaRegenRate = movementScript.staminaRegenRate * levelScaleFactor;
+            sounds.levelUpSound.Play();
+        }
     }
 
 
@@ -108,9 +109,10 @@ public class WolfProgression : MonoBehaviour
     }
 
     private void Start() {
-        // Grab a reference to the movement of this wolf. Will be used in upgrading.
-        movementScript = this.GetComponent<WolfMovementScript>();
-        predatorScript = this.GetComponent<Predator>();
+        wolves = GameObject.FindGameObjectsWithTag("Wolf");
     }
 
+    public void Update() {
+        Debug.Log(sheepConsumed);
+    }
 }

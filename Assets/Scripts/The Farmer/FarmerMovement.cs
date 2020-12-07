@@ -97,7 +97,7 @@ public class FarmerMovement : MonoBehaviour
     public GameObject findNextTarget() {
         foreach(GameObject wolf in wolves) {
             // If the wolf is alive
-            if (wolf.gameObject.GetComponent<WolfProgression>().isAlive && !wolf.gameObject.GetComponent<WolfMovementScript>().isDetained) {
+            if (wolf.gameObject.GetComponent<WolfStatus>().isAlive && !wolf.gameObject.GetComponent<WolfMovementScript>().isDetained) {
                 target = wolf;
                 return wolf;
             }
@@ -116,22 +116,19 @@ public class FarmerMovement : MonoBehaviour
     {
         target = wolf1;
         wolves = new GameObject[] {wolf1, wolf2, wolf3};
-        if(!gameSystem.getGameEnded()) {
-            InvokeRepeating("huntTheWolves", 0, updateFrequency);
-        }
     } 
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($" {gameObject.name}'s target = {target}");
+        // Solves weird case where the new target isn't getting found.
+        if (target != null && !target.GetComponent<WolfStatus>().isAlive) {
+            findNextTarget();
+        }
         GameObject wolfSensed = searchForWolves();
         if(wolfSensed != null) {
             target = wolfSensed;
-        } else {
-            if (target != null) {
-                huntTheWolves();
-            }
         }
+        huntTheWolves();
     }
 }

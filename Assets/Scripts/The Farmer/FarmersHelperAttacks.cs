@@ -36,13 +36,14 @@ public class FarmersHelperAttacks : MonoBehaviour
             if(hitCollider.gameObject.tag == "Wolf") {
                   beginDetain(hitCollider.gameObject);
                   movementScript.findNextTarget();
+                  Debug.Log(movementScript.target);
             }
         }
     }
 
     void notifyTheFarmer() {
         // If the current target is NOT detained, let them know about this detained target.
-        if(!farmer.GetComponent<FarmerMovement>().target.GetComponent<WolfMovementScript>().isDetained ){
+        if(!farmer.GetComponent<FarmerMovement>().target.GetComponent<WolfMovementScript>().isDetained){
             farmer.GetComponent<FarmerMovement>().target = detainedTarget;
         }
         
@@ -51,8 +52,13 @@ public class FarmersHelperAttacks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (detainedTarget != null) {
-            notifyTheFarmer();     
+            if (detainedTarget.GetComponent<WolfMovementScript>().isDetained) {
+                notifyTheFarmer();    
+            } else {
+                detainedTarget = null;
+            }
         }
         target = movementScript.target;
         detain();

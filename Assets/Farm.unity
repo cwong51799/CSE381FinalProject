@@ -7229,6 +7229,7 @@ GameObject:
   - component: {fileID: 624952659}
   - component: {fileID: 624952658}
   - component: {fileID: 624952657}
+  - component: {fileID: 624952666}
   m_Layer: 9
   m_Name: Wolf 2
   m_TagString: Wolf
@@ -7303,13 +7304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb958226995a5b942b87a74149197ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level1Threshold: 5
-  Level2Threshold: 15
-  Level3Threshold: 30
-  Level4Threshold: 50
   isAlive: 1
-  levelScaleFactor: 1.25
-  sounds: {fileID: 652437742}
 --- !u!114 &624952662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7322,6 +7317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9007c986637334e45b50782e1e882fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressionScript: {fileID: 685651600}
   gameSystem: {fileID: 1176949405}
   sounds: {fileID: 652437742}
   eatRadius: 5
@@ -7382,9 +7378,22 @@ Transform:
   m_Children:
   - {fileID: 2028682015}
   - {fileID: 399344294}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 685651601}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+--- !u!114 &624952666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624952656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb958226995a5b942b87a74149197ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAlive: 1
 --- !u!1 &634352996
 GameObject:
   m_ObjectHideFlags: 0
@@ -7635,7 +7644,7 @@ Transform:
   - {fileID: 316191539}
   - {fileID: 1920301369}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &652836135
 PrefabInstance:
@@ -8140,6 +8149,58 @@ Transform:
   m_Father: {fileID: 1395273859}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &685651599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 685651601}
+  - component: {fileID: 685651600}
+  m_Layer: 0
+  m_Name: Wolves
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &685651600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685651599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99eaeac088f74c743ae3b2b941ae63d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level1Threshold: 5
+  Level2Threshold: 15
+  Level3Threshold: 50
+  Level4Threshold: 75
+  levelScaleFactor: 1.25
+  sounds: {fileID: 652437742}
+--- !u!4 &685651601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685651599}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 875044272}
+  - {fileID: 624952665}
+  - {fileID: 1201878242}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &690537745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8311,7 +8372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &700300613
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10505,11 +10566,11 @@ GameObject:
   - component: {fileID: 875044271}
   - component: {fileID: 875044270}
   - component: {fileID: 875044273}
-  - component: {fileID: 875044274}
   - component: {fileID: 875044275}
   - component: {fileID: 875044276}
   - component: {fileID: 875044277}
   - component: {fileID: 875044278}
+  - component: {fileID: 875044274}
   m_Layer: 9
   m_Name: Wolf 1
   m_TagString: Wolf
@@ -10533,7 +10594,7 @@ MonoBehaviour:
   controller: {fileID: 875044271}
   cam: {fileID: 422017221}
   detainCountdown: {fileID: 952987619}
-  baseSpeed: 15
+  baseSpeed: 50
   movingSpeed: 0
   maxStamina: 100
   currentStamina: 0
@@ -10568,14 +10629,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875044269}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
   m_LocalPosition: {x: -76.1, y: 0, z: -74.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 700300616}
   - {fileID: 942928460}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 685651601}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!114 &875044273
 MonoBehaviour:
@@ -10589,6 +10650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9007c986637334e45b50782e1e882fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressionScript: {fileID: 685651600}
   gameSystem: {fileID: 1176949405}
   sounds: {fileID: 652437742}
   eatRadius: 5
@@ -10604,13 +10666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb958226995a5b942b87a74149197ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level1Threshold: 5
-  Level2Threshold: 15
-  Level3Threshold: 30
-  Level4Threshold: 50
   isAlive: 1
-  levelScaleFactor: 1.25
-  sounds: {fileID: 652437742}
 --- !u!114 &875044275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13084,7 +13140,7 @@ RectTransform:
   - {fileID: 1942396348}
   - {fileID: 1600489184}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -14542,7 +14598,7 @@ Transform:
   - {fileID: 1331080068}
   - {fileID: 1307692996}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1176949405
 MonoBehaviour:
@@ -14569,6 +14625,7 @@ MonoBehaviour:
   wolf1: {fileID: 875044269}
   wolf2: {fileID: 624952656}
   wolf3: {fileID: 1201878234}
+  progressionScript: {fileID: 685651600}
   sounds: {fileID: 652437742}
   phaseLengthsInMinutes: 0.01
   initialSheepDemand: 5
@@ -14664,6 +14721,7 @@ GameObject:
   - component: {fileID: 1201878237}
   - component: {fileID: 1201878236}
   - component: {fileID: 1201878235}
+  - component: {fileID: 1201878243}
   m_Layer: 9
   m_Name: Wolf 3
   m_TagString: Wolf
@@ -14724,13 +14782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb958226995a5b942b87a74149197ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level1Threshold: 5
-  Level2Threshold: 15
-  Level3Threshold: 30
-  Level4Threshold: 50
   isAlive: 1
-  levelScaleFactor: 1.25
-  sounds: {fileID: 652437742}
 --- !u!114 &1201878239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14743,6 +14795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9007c986637334e45b50782e1e882fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressionScript: {fileID: 685651600}
   gameSystem: {fileID: 1176949405}
   sounds: {fileID: 652437742}
   eatRadius: 5
@@ -14797,15 +14850,28 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201878234}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 100.7, y: 0, z: -103.8}
   m_LocalScale: {x: 0.5000003, y: 0.5, z: 0.5000003}
   m_Children:
   - {fileID: 1389021629}
   - {fileID: 1337710862}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 685651601}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1201878243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201878234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb958226995a5b942b87a74149197ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAlive: 1
 --- !u!1001 &1204348927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16173,7 +16239,7 @@ NavMeshAgent:
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 40
-  m_Acceleration: 20
+  m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 1
   m_StoppingDistance: 0
@@ -16563,6 +16629,7 @@ MonoBehaviour:
   gameSystem: {fileID: 1176949405}
   movementScript: {fileID: 1331080069}
   sounds: {fileID: 652437742}
+  progressionScript: {fileID: 685651600}
 --- !u!1 &1337710858
 GameObject:
   m_ObjectHideFlags: 0
@@ -16581,7 +16648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &1337710859
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24405,11 +24472,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Wolf 1: 0 Consumed
-
-    Wolf 2: 0 Consumed
-
-    Wolf 3: 0 Consumed'
+  m_Text: 'Sheep Consumed: 0'
 --- !u!222 &1942396350
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25406,7 +25469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &2028682012
 SphereCollider:
   m_ObjectHideFlags: 0

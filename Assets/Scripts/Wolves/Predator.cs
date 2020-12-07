@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Predator : MonoBehaviour
 {
-    WolfProgression progressionScript;
+    public WolfProgressionMaster progressionScript;
 
     public FarmersRules gameSystem;
 
@@ -16,7 +16,7 @@ public class Predator : MonoBehaviour
 
     void Start()
     {
-        progressionScript = this.GetComponent<WolfProgression>();
+        
     }
     // Update is called once per frame
     void Update()
@@ -40,6 +40,7 @@ public class Predator : MonoBehaviour
                     }
                     if(hitCollider.gameObject.tag == "FreeSheep") {
                         // Play sheep consume sound;
+                        Debug.Log("FREE SHEEP EATEN");
                         sounds.sheepConsumeSound.Play();
                         preyScript.getEaten();
                         progressionScript.consumeASheep();

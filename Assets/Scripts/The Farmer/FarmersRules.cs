@@ -32,6 +32,7 @@ public class FarmersRules : MonoBehaviour
 
     CaptureSystem captureSystem;
 
+    public WolfProgressionMaster progressionScript;
 
     public SoundContainer sounds;
 
@@ -117,7 +118,6 @@ public class FarmersRules : MonoBehaviour
     void updateUILevelInfo() {
         Text txt = UI_LevelInfo.GetComponent<Text>();
         // Use Wolf 1 as reference for their progression, all of them should be the same.
-        WolfProgression progressionScript = wolf1.GetComponent<WolfProgression>();
         txt.text = $"Level 1: {progressionScript.Level1Threshold} Sheep\n" +
                    $"Level 2: {progressionScript.Level2Threshold} Sheep\n" +
                    $"Level 3: {progressionScript.Level3Threshold} Sheep\n" + 
@@ -161,9 +161,7 @@ public class FarmersRules : MonoBehaviour
 
     public void updateWolfConsumationCount() {
         Text txt = UI_SheepConsumedInfo.GetComponent<Text>();
-        txt.text = $"Wolf 1: {wolf1.GetComponent<WolfProgression>().getSheepConsumed()} Consumed\n" +
-            $"Wolf 2: {wolf2.GetComponent<WolfProgression>().getSheepConsumed()} Consumed\n" +
-            $"Wolf 3: {wolf3.GetComponent<WolfProgression>().getSheepConsumed()} Consumed\n";
+        txt.text = $"Sheep Consumed: {progressionScript.getSheepConsumed()}";
     }
 
 

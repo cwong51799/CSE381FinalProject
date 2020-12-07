@@ -21,10 +21,12 @@ public class FarmersAttack : MonoBehaviour
 
     public SoundContainer sounds;
 
+    public WolfProgressionMaster progressionScript;
+
     void makeTheWolvesPrey() {
         foreach(GameObject wolf in wolves) {
             // If a wolf is level 4, it CANNOT be killed.
-            if (wolf.GetComponent<WolfProgression>().getWolfLevel() < 4) {
+            if (progressionScript.getWolfLevel() < 4) {
                 wolf.AddComponent<Prey>();
             }
         }        
@@ -45,8 +47,8 @@ public class FarmersAttack : MonoBehaviour
                 if(hitCollider.gameObject.tag == "Wolf") {
                     // If the tag is wolf, a wolf just died. Find the next target.
                     sounds.wolfDeathSound.Play();
-                    movementScript.findNextTarget();
-                    target = movementScript.target;
+                    target = movementScript.findNextTarget();
+                    Debug.Log($"NEW TARGET {target.name}");
                     if (target) {
                         swapper.setControlTo(target);
                     }
