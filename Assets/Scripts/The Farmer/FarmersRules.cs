@@ -131,14 +131,12 @@ public class FarmersRules : MonoBehaviour
 
 
     public void playerLosesTheGame() {
-        Debug.Log("PLAYER LOSES THE GAME.");
         UI_Result.GetComponent<Text>().text = "GAME OVER";
         UI_Result.SetActive(true);
         gameEnded = true;
     }
 
     public void playerWinsTheGame() {
-        Debug.Log("PLAYER WINS THE GAME.");
         UI_Result.GetComponent<Text>().text = "THE FARMER IS GONE. YOU WIN.";
         UI_Result.SetActive(true);
         gameEnded = true;

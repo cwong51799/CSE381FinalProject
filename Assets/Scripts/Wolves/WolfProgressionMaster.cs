@@ -61,9 +61,11 @@ public class WolfProgressionMaster : MonoBehaviour
     }
 
     void shakeOffAnyPreyComponents() {
-        Prey component = this.gameObject.GetComponent<Prey>();
-        if(component) {
-            Destroy(this.gameObject.GetComponent<Prey>());
+        foreach(GameObject wolf in wolves) {
+            Prey component = wolf.gameObject.GetComponent<Prey>();
+            if(component) {
+                Destroy(wolf.gameObject.GetComponent<Prey>());
+            }
         }
     }
 
