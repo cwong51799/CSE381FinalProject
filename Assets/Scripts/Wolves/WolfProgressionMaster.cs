@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Progression system for the wolves.
+
+
+/*
+WolfProgressionMaster
+    This script houses the system behind the wolf progression. All wolves share the same progression.
+    The script is notified when a sheep is consumed and performs level ups.
+*/
 public class WolfProgressionMaster : MonoBehaviour
 {
 
@@ -63,7 +69,7 @@ public class WolfProgressionMaster : MonoBehaviour
 
     void grow() {
         foreach(GameObject wolf in wolves) {
-            WolfMovementScript movementScript = wolf.GetComponent<WolfMovementScript>();
+            WolfMovement movementScript = wolf.GetComponent<WolfMovement>();
             // Make the wolf larger and louder.
             wolf.gameObject.transform.localScale += new Vector3(.25f,.25f,.25f);
             wolf.gameObject.transform.position += new Vector3(0,-.25f,0);
@@ -74,7 +80,7 @@ public class WolfProgressionMaster : MonoBehaviour
     // Level up stats
     void levelUpStats() {
         foreach(GameObject wolf in wolves) {
-            WolfMovementScript movementScript = wolf.GetComponent<WolfMovementScript>();
+            WolfMovement movementScript = wolf.GetComponent<WolfMovement>();
             movementScript.maxStamina = movementScript.maxStamina * levelScaleFactor;
             movementScript.baseSpeed = movementScript.baseSpeed * levelScaleFactor;
             movementScript.staminaRegenRate = movementScript.staminaRegenRate * levelScaleFactor;
@@ -112,7 +118,4 @@ public class WolfProgressionMaster : MonoBehaviour
         wolves = GameObject.FindGameObjectsWithTag("Wolf");
     }
 
-    public void Update() {
-        Debug.Log(sheepConsumed);
-    }
 }

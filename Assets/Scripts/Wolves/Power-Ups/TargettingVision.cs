@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+TargettingVision
+    This script provides the behavior for the "Q" action. The script toggles on
+    all the sheep's detection beams and then manages the cooldown and duration for it.
+*/
 public class TargettingVision : MonoBehaviour
 {
     bool visionOn;
@@ -20,7 +26,7 @@ public class TargettingVision : MonoBehaviour
         GameObject[] freeSheep = GameObject.FindGameObjectsWithTag("FreeSheep");
         // Iterate through all the free sheep, toggling on their beams
         foreach(GameObject sheep in freeSheep) {
-             GameObject targettingBeam = sheep.GetComponent<TargettingBeamScript>().targettingBeam;
+             GameObject targettingBeam = sheep.GetComponent<TargettingBeamContainer>().targettingBeam;
              targettingBeam.SetActive(true);
         }
         visionReady = false;
@@ -31,7 +37,7 @@ public class TargettingVision : MonoBehaviour
         GameObject[] freeSheep = GameObject.FindGameObjectsWithTag("FreeSheep");
         // Iterate through all the free sheep, toggling on their beams
         foreach(GameObject sheep in freeSheep) {
-             GameObject targettingBeam = sheep.GetComponent<TargettingBeamScript>().targettingBeam;
+             GameObject targettingBeam = sheep.GetComponent<TargettingBeamContainer>().targettingBeam;
              targettingBeam.SetActive(false);
         }
         visionOn = false;
@@ -65,8 +71,6 @@ public class TargettingVision : MonoBehaviour
             startCooldown();
         }
     }
-
-
 
     // Update is called once per frame
     void Update()

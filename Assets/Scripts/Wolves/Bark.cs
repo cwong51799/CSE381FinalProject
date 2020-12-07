@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+Bark
+    This script manages the "F" action behavior. Barking causes all sheep within
+    the given radius to become aware of the wolf and run away. Highly useful for
+    leading the sheep towards the wrangling zone.
+*/
 public class Bark : MonoBehaviour
 {
 
     public SoundContainer sounds;
-
 
     public float barkSoundRadius = 20f;
     // Update is called once per frame

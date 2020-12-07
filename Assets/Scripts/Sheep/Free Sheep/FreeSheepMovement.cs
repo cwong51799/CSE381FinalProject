@@ -4,16 +4,17 @@ using UnityEngine.AI;
 using UnityEngine;
 
 
-
-/* The sheep has a few states:
-1. Grazing: When the sheep does not detect any nearby wolf. A sheep is grazing when there is no wolf detected.
-            A sheep will pick a new location on the NavMesh every 10 seconds to path to.
-2. Running: When the sheep has detected a wolf through hearing/sight and is broadcasting a startle.
-            The difference between running and startled is subtle. A running sheep will not be able to be
-            startled, meaning a sheep will focus on running away from the wolf it sees before entering a state of startle.
-            A sheep is deterministically in a running state when there is a wolf detected but it is not startled.
-3. Startled: When the sheep was alerted by a nearby sheep to run away. A sheep is in the startled state when there is a wolf detected an it is startled.
-
+/*
+FreeSheepMovement
+    This script is responsible for the grazing of free sheep and their behavior towards wolves.
+    The sheep has a few states:
+    1. Grazing: When the sheep does not detect any nearby wolf. A sheep is grazing when there is no wolf detected.
+                A sheep will pick a new location on the NavMesh every 10 seconds to path to.
+    2. Running: When the sheep has detected a wolf through hearing/sight and is broadcasting a startle.
+                The difference between running and startled is subtle. A running sheep will not be able to be
+                startled, meaning a sheep will focus on running away from the wolf it sees before entering a state of startle.
+                A sheep is deterministically in a running state when there is a wolf detected but it is not startled.
+    3. Startled: When the sheep was alerted by a nearby sheep to run away. A sheep is in the startled state when there is a wolf detected an it is startled.
 */
 public class FreeSheepMovement : MonoBehaviour
 {
@@ -85,7 +86,7 @@ public class FreeSheepMovement : MonoBehaviour
 
 
     bool isWolfAudible(GameObject wolf) {
-        WolfMovementScript wolfScript = wolf.GetComponent<WolfMovementScript>();
+        WolfMovement wolfScript = wolf.GetComponent<WolfMovement>();
         float dist = Vector3.Distance(this.transform.position, wolf.transform.position);
         // If the wolf is in audible distance and it's not crouching, return true.
         if(dist < wolfScript.audibleRange && !wolfScript.getCrouchingStatus()) {
@@ -141,7 +142,7 @@ public class FreeSheepMovement : MonoBehaviour
             // Check if wolf still exists
             if (wolf != null) {
                 if (isWolfAudible(wolf)) {
-                    if(wolf.GetComponent<WolfMovementScript>().isAudible()) {
+                    if(wolf.GetComponent<WolfMovement>().isAudible()) {
                         return wolf;
                     }
                 }

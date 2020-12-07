@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+JumpingSheepScript
+    This is the script responsible for the Jumping Sheep type. When a jumping sheep
+    detects a wolf, it will jump into the air for a while, discouraging the player from
+    just waiting for it to land by wasting their time.
+*/
 public class JumpingSheepScript : MonoBehaviour
 {
     public CharacterController controller;

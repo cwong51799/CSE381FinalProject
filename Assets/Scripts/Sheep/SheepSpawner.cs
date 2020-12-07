@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
+/*
+SheepSpawner
+    This script is responsible for spawning in clones of the provided sheeps.
+*/
 public class SheepSpawner : MonoBehaviour
 {
     public GameObject plainSheepToCreate;
@@ -51,7 +55,7 @@ public class SheepSpawner : MonoBehaviour
     void spawnASheep(GameObject sheepToSpawn) {
         Vector3 location = pickARandomLocation();
         GameObject newSheep = Instantiate(sheepToSpawn, location, Random.rotation);
-        newSheep.GetComponent<TargettingBeamScript>().targettingBeam.SetActive(false);
+        newSheep.GetComponent<TargettingBeamContainer>().targettingBeam.SetActive(false);
         newSheep.SetActive(true);
     }
 

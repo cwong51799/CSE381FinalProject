@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-// Movement system for the wolves.
-public class WolfMovementScript : MonoBehaviour
+/*
+WolfMovement
+    This script is responsible for all things that have to do with the wolf movement, and some.
+    This contains the stamina system for sprinting and the event handlers for movement input.
+*/
+public class WolfMovement : MonoBehaviour
 {
 
     // If this is the 1 of 3 wolves currently under control
@@ -81,8 +85,6 @@ public class WolfMovementScript : MonoBehaviour
             detainCountdown.text = "";
         }
     }
-
-
 
 
     void Start() {

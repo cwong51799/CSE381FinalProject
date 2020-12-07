@@ -4,7 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-// Updates UI and keeps track of the games core rule of herding enough sheep to keep the farmer happy.
+/*
+FarmersRules
+    The FarmersRules is the core component to how the game plays out. This script carries out the
+    math for the phase system, checks if the farmer is pleased at the end of a phase, 
+    and updates the UI appropriately. It is also in charge of the behavior when the game ends in either direction.
+*/
 public class FarmersRules : MonoBehaviour
 {
     public GameObject UI_Phase;
@@ -178,9 +183,14 @@ public class FarmersRules : MonoBehaviour
     }
 
     void checkForGameEnd() {
-        GameObject[] wolves = GameObject.FindGameObjectsWithTag("Wolf");
-        if (wolves.Length == 0) {
+        // Lose condition
+        if (GameObject.FindGameObjectsWithTag("Wolf").Length == 0) {
             playerLosesTheGame();
+            setGameEnded(true);
+        }
+        // Win condition
+        if(farmerReleased==true && GameObject.FindGameObjectsWithTag("Farmer").Length == 0) {
+            playerWinsTheGame();
             setGameEnded(true);
         }
     }

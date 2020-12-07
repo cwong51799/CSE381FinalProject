@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/*
+CaptureSystem
+    This is the system in charge of bringing FreeSheep into the captured area.
+    The main driver of this is a GameObject with a collision detection. A sheep
+    can only be captured if a wolf is nearby to prevent sheep from being
+    insta-captured if they spawn by the zone.
+*/
 public class CaptureSystem : MonoBehaviour
 {
     public GameObject capturedArea;

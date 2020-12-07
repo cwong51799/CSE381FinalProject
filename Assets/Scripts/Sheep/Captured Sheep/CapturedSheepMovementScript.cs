@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-// Captured Sheeps just path around within the captured area's NavMesh
+/*
+CapturedSheepMovementScript
+    This script just makes captured sheep path somewhere within the captured area.
+    Makes it look way better than if they were just static.
+*/
 public class CapturedSheepMovementScript : MonoBehaviour
 {
 

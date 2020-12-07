@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+Gravity
+    This script makes a character controller fall when it's in the air.
+*/
 public class Gravity : MonoBehaviour
 {
     public CharacterController controller;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public float fallRate = -9.8f;
     // Update is called once per frame

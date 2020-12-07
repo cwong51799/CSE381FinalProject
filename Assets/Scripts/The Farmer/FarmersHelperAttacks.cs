@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Freezes you in place so the farmer can come get you.
+/*
+FarmersHelperAttacks
+    This script is responsible for the actions that a Farmer's Helper takes. The helper 
+    constantly attempts to "detain" nearby wolves. If the helper successfully detains a 
+    wolf, he will notify the farmer by updating the farmer's target to the detained wolf.
+    The farmer will only respond to this if it's current target is not detained. This is
+    to prevent a swift double detainment from bugging out the farmer.
+    A Level 4 wolf cannot be detained.
+*/
 public class FarmersHelperAttacks : MonoBehaviour
 {
 
@@ -19,10 +27,8 @@ public class FarmersHelperAttacks : MonoBehaviour
     public float detainRadius = 3;
 
 
-
-
     void beginDetain(GameObject wolf) {
-        WolfMovementScript wolfMovement = wolf.GetComponent<WolfMovementScript>();
+        WolfMovement wolfMovement = wolf.GetComponent<WolfMovement>();
         // DETAIN THEM.
         wolfMovement.isDetained = true;
         detainedTarget = wolf;
@@ -33,7 +39,7 @@ public class FarmersHelperAttacks : MonoBehaviour
         // Search for nearby prey
         foreach (var hitCollider in hitColliders){
             // THE FARMERS HELPERS WILL DETAIN THE WOLF AND NOTIFY THE FARMER TO COME.
-            if(hitCollider.gameObject.tag == "Wolf") {
+            if(hitCollider.gameObject.tag == "Wolf" && hitCollider.gameObject.GetComponent<Prey>() != null) {
                   beginDetain(hitCollider.gameObject);
                   movementScript.findNextTarget();
                   Debug.Log(movementScript.target);
@@ -43,18 +49,16 @@ public class FarmersHelperAttacks : MonoBehaviour
 
     void notifyTheFarmer() {
         // If the current target is NOT detained, let them know about this detained target.
-        if(!farmer.GetComponent<FarmerMovement>().target.GetComponent<WolfMovementScript>().isDetained){
+        if(!farmer.GetComponent<FarmerMovement>().target.GetComponent<WolfMovement>().isDetained){
             farmer.GetComponent<FarmerMovement>().target = detainedTarget;
         }
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (detainedTarget != null) {
-            if (detainedTarget.GetComponent<WolfMovementScript>().isDetained) {
+            if (detainedTarget.GetComponent<WolfMovement>().isDetained) {
                 notifyTheFarmer();    
             } else {
                 detainedTarget = null;

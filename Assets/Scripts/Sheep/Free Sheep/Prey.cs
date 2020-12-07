@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+Prey
+    This script is responsbile for a GameObject getting "eaten." Different
+    types have different behaviors, and I probably should have split this up
+    into multiple scripts. But it ain't bad.
+*/
 public class Prey : MonoBehaviour
 {
     public SoundContainer sounds;

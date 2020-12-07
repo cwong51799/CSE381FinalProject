@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Script for the camera to swap between the wolves, given that the wolf is still alive.
+/*
+Bounce
+    Makes a wolf constantly bounce, probably won't use this.
+*/
 public class Bounce : MonoBehaviour
 {
     

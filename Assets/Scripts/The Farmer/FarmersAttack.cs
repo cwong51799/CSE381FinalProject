@@ -1,10 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+
+/*
+FarmersAttack
+    This script is responsible for having the farmer constantly "swing" at nearby targets.
+    The farmer, in rage, also kills nearby sheep. This is to make it even more difficult for
+    the player to consume sheep once the farmer comes out.
+    If the farmer slashes a wolf, and the wolf is not yet level 4, then the wolf is killed and
+    the farmer will immediately look for the next target.
+*/
+
+
 public class FarmersAttack : MonoBehaviour
 {
-
     public GameObject wolf1, wolf2, wolf3;
     GameObject[] wolves;
 

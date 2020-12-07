@@ -4,8 +4,10 @@ using UnityEngine;
 
 
 
-// Provides all the sounds through public access.
-// Just provide the sound user the sound container and have it access it from here.
+/*
+SoundContainer
+    This is the primary sound system for accessing all the different sounds.
+*/
 public class SoundContainer : MonoBehaviour
 {
     public AudioSource jumpingSound;

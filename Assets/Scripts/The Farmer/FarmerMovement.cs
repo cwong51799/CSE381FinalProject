@@ -4,7 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-// Kinda poetic how most of these methods came from the sheep and now the wolf is the prey.
+/* 
+FarmerMovement
+    This is responsible for the Farmer and the Farmer's Helper's movement.
+    Farmers will constantly hunt down living wolves by updating their destination to the targets position.
+    If a Farmer senses while targetting another wolf (in FOV) then it will swap targets to the sensed wolf.
+    If the wolf the farmer is targetting is killed, it will find the next available alive wolf to target.
+*/
 public class FarmerMovement : MonoBehaviour
 {
     public Camera vision;
@@ -13,8 +19,6 @@ public class FarmerMovement : MonoBehaviour
     GameObject[] wolves;
 
     public NavMeshAgent agent;
-
-    public float updateFrequency = 20;
 
     public GameObject target;
 
@@ -32,7 +36,7 @@ public class FarmerMovement : MonoBehaviour
     GameObject lookForWolves() {
         foreach(var wolf in wolves) {
             // Check if it's been destroyed
-            if (wolf != null && !wolf.gameObject.GetComponent<WolfMovementScript>().isDetained) {
+            if (wolf != null && !wolf.gameObject.GetComponent<WolfMovement>().isDetained) {
                 if (isWolfInFrustum(wolf)) {
                     return wolf;
                 }
@@ -45,8 +49,8 @@ public class FarmerMovement : MonoBehaviour
     GameObject listenForWolves() {
         foreach(var wolf in wolves) {
             if (wolf != null) {
-                if (isWolfAudible(wolf) && !wolf.gameObject.GetComponent<WolfMovementScript>().isDetained) {
-                    if(wolf.GetComponent<WolfMovementScript>().isAudible()) {
+                if (isWolfAudible(wolf) && !wolf.gameObject.GetComponent<WolfMovement>().isDetained) {
+                    if(wolf.GetComponent<WolfMovement>().isAudible()) {
                         return wolf;
                     }
                 }
@@ -56,7 +60,7 @@ public class FarmerMovement : MonoBehaviour
     }
 
     bool isWolfAudible(GameObject wolf) {
-        WolfMovementScript wolfScript = wolf.GetComponent<WolfMovementScript>();
+        WolfMovement wolfScript = wolf.GetComponent<WolfMovement>();
         float dist = Vector3.Distance(this.transform.position, wolf.transform.position);
         // If the wolf is in audible distance and it's not crouching, return true.
         if(dist < wolfScript.audibleRange && !wolfScript.getCrouchingStatus()) {
@@ -97,7 +101,7 @@ public class FarmerMovement : MonoBehaviour
     public GameObject findNextTarget() {
         foreach(GameObject wolf in wolves) {
             // If the wolf is alive
-            if (wolf.gameObject.GetComponent<WolfStatus>().isAlive && !wolf.gameObject.GetComponent<WolfMovementScript>().isDetained) {
+            if (wolf.gameObject.GetComponent<WolfStatus>().isAlive && !wolf.gameObject.GetComponent<WolfMovement>().isDetained) {
                 target = wolf;
                 return wolf;
             }

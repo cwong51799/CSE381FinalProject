@@ -4,16 +4,20 @@ using Cinemachine;
 using UnityEngine;
 
 
-// Script for the camera to swap between the wolves, given that the wolf is still alive.
+/*
+WolfSwapper
+    This script is in charge of the "1,2,3" action behaviors. This swaps the camera
+    between the 3 wolves as well as designates player control to them.
+*/
 public class WolfSwapper : MonoBehaviour
 {
     public GameObject wolf1, wolf2, wolf3;
 
     GameObject[] wolves;
 
-    WolfMovementScript wolf1movement, wolf2movement, wolf3movement;
+    WolfMovement wolf1movement, wolf2movement, wolf3movement;
 
-    WolfMovementScript[] wolfScripts;
+    WolfMovement[] wolfScripts;
 
     CinemachineFreeLook freeLook;
     
@@ -36,13 +40,13 @@ public class WolfSwapper : MonoBehaviour
     void Start() {
         freeLook = this.GetComponent<CinemachineFreeLook>();
         // Capture their scripts
-        wolf1movement = wolf1.GetComponent<WolfMovementScript>();
-        wolf2movement = wolf2.GetComponent<WolfMovementScript>();
-        wolf3movement = wolf3.GetComponent<WolfMovementScript>();
+        wolf1movement = wolf1.GetComponent<WolfMovement>();
+        wolf2movement = wolf2.GetComponent<WolfMovement>();
+        wolf3movement = wolf3.GetComponent<WolfMovement>();
 
         wolves = new GameObject[]{wolf1,wolf2,wolf3};
 
-        wolfScripts = new WolfMovementScript[] {wolf1movement, wolf2movement, wolf3movement};
+        wolfScripts = new WolfMovement[] {wolf1movement, wolf2movement, wolf3movement};
 
         // Set current wolf as current playable character 
         setControlTo(wolf1);
