@@ -13777,10 +13777,10 @@ MonoBehaviour:
   wolf2: {fileID: 624952656}
   wolf3: {fileID: 1201878234}
   sounds: {fileID: 652437742}
-  phaseLengthsInMinutes: 0.1
+  phaseLengthsInMinutes: 0.5
   initialSheepDemand: 5
   sheepDemandScale: 1.5
-  levelTimerScale: 1
+  levelTimerScale: 1.25
 --- !u!1001 &1178962931
 PrefabInstance:
   m_ObjectHideFlags: 0
