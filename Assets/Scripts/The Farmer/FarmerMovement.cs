@@ -119,7 +119,7 @@ public class FarmerMovement : MonoBehaviour
         if(!gameSystem.getGameEnded()) {
             InvokeRepeating("huntTheWolves", 0, updateFrequency);
         }
-    }
+    } 
 
     // Update is called once per frame
     void Update()
@@ -128,8 +128,10 @@ public class FarmerMovement : MonoBehaviour
         GameObject wolfSensed = searchForWolves();
         if(wolfSensed != null) {
             target = wolfSensed;
-            // Continuously update position IF it senses one (run the wolf down)
-            huntTheWolves();
+        } else {
+            if (target != null) {
+                huntTheWolves();
+            }
         }
     }
 }
