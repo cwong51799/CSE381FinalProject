@@ -28,10 +28,15 @@ public class FarmersHelperAttacks : MonoBehaviour
 
 
     void beginDetain(GameObject wolf) {
+
         WolfMovement wolfMovement = wolf.GetComponent<WolfMovement>();
         // DETAIN THEM.
-        wolfMovement.isDetained = true;
-        detainedTarget = wolf;
+        if(wolfMovement.isDetained == false) {
+            sounds.detain.Play();
+            wolfMovement.isDetained = true;
+            detainedTarget = wolf;
+        }
+
     }
 
     void detain() {
@@ -42,7 +47,6 @@ public class FarmersHelperAttacks : MonoBehaviour
             if(hitCollider.gameObject.tag == "Wolf" && hitCollider.gameObject.GetComponent<Prey>() != null) {
                   beginDetain(hitCollider.gameObject);
                   movementScript.findNextTarget();
-                  Debug.Log(movementScript.target);
             }
         }
     }

@@ -34,6 +34,7 @@ public class Predator : MonoBehaviour
                     // Can only eat farmer if progression level is 4
                     if(preyScript.gameObject.tag == "Farmer" && progressionScript.getWolfLevel() == 4) {
                         // Win con
+                        sounds.sheepConsumeSound.Play();
                         preyScript.getEaten();
                     }
                     if(hitCollider.gameObject.tag == "FreeSheep") {

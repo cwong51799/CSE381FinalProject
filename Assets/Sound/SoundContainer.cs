@@ -25,4 +25,8 @@ public class SoundContainer : MonoBehaviour
     public AudioSource farmerSoundtrack;
 
     public AudioSource barkSound;
+
+    public AudioSource victory;
+
+    public AudioSource detain;
 }

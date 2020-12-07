@@ -57,7 +57,6 @@ public class FarmersAttack : MonoBehaviour
                     // If the tag is wolf, a wolf just died. Find the next target.
                     sounds.wolfDeathSound.Play();
                     target = movementScript.findNextTarget();
-                    Debug.Log($"NEW TARGET {target.name}");
                     if (target) {
                         swapper.setControlTo(target);
                     }

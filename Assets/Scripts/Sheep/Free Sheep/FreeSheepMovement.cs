@@ -226,6 +226,9 @@ public class FreeSheepMovement : MonoBehaviour
         keepPathing = continuePathing;
     }
 
+
+
+
     // Run in the opposite direction.
     public void runAway(GameObject gameObjectToRunAwayFrom) {
             float step =  -1 * runSpeed * Time.deltaTime; // calculate distance to move

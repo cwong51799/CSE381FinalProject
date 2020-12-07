@@ -139,6 +139,8 @@ public class FarmersRules : MonoBehaviour
     public void playerWinsTheGame() {
         UI_Result.GetComponent<Text>().text = "THE FARMER IS GONE. YOU WIN.";
         UI_Result.SetActive(true);
+        sounds.farmerSoundtrack.Stop();
+        sounds.victory.Play();
         gameEnded = true;
     }
 
@@ -210,7 +212,9 @@ public class FarmersRules : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkForGameEnd();
+        if(!gameEnded) {
+            checkForGameEnd();
+        }
         if (!farmerReleased) {
             timer += Time.deltaTime;
             checkForPhaseUpdate();
