@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: e2dc61f07d8ec3d4cabb995bad9dd4fc, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1fb520b5e3546c441a34e33c6c3a959e, type: 2}
 --- !u!1001 &2132298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1517,7 +1517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106172082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.61, y: 0, z: -1}
+  m_LocalPosition: {x: -0.6, y: 0, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1854819263}
@@ -4806,7 +4806,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422017220}
-  m_LocalRotation: {x: 0.030929431, y: -0.71013016, z: 0.03125666, w: 0.70269597}
+  m_LocalRotation: {x: 0.030929435, y: -0.71013004, z: 0.031256653, w: 0.7026961}
   m_LocalPosition: {x: 22.460556, y: 1.3130112, z: -8.3889065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -8178,10 +8178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 022271daf1210034bb23d3985a499c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level1Threshold: 1
-  Level2Threshold: 2
-  Level3Threshold: 3
-  Level4Threshold: 4
+  Level1Threshold: 5
+  Level2Threshold: 12
+  Level3Threshold: 30
+  Level4Threshold: 50
   levelScaleFactor: 1.25
   sounds: {fileID: 652437742}
 --- !u!4 &685651601
@@ -8802,7 +8802,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722750241}
-  m_LocalRotation: {x: 0.03092944, y: -0.71013016, z: 0.03125666, w: 0.7026959}
+  m_LocalRotation: {x: 0.03092944, y: -0.7101301, z: 0.031256657, w: 0.70269597}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11316,7 +11316,7 @@ GameObject:
   - component: {fileID: 938282341}
   - component: {fileID: 938282340}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: CaptureCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11408,7 +11408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938282339}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -17.6, y: 0.96, z: 51.69}
+  m_LocalPosition: {x: -17.6, y: 0.96, z: 52.1}
   m_LocalScale: {x: 1.0333909, y: 3.016322, z: 10.405179}
   m_Children: []
   m_Father: {fileID: 484742086}
@@ -14165,11 +14165,11 @@ MonoBehaviour:
   plainSheepToCreate: {fileID: 2114670204}
   jumpingSheepToCreate: {fileID: 1479497203}
   initialNumberOfSheep: 30
-  initialNumberOfJumpingSheep: 8
+  initialNumberOfJumpingSheep: 3
   sheepSpawnFrequency: 20
   amountOfPlainSheepPerSpawn: 30
-  amountOfJumpingSheepPerSpawn: 5
-  MAX_AMOUNT_OF_FREE_SHEEP: 100
+  amountOfJumpingSheepPerSpawn: 3
+  MAX_AMOUNT_OF_FREE_SHEEP: 80
 --- !u!4 &1123105655
 Transform:
   m_ObjectHideFlags: 0
@@ -14555,6 +14555,7 @@ GameObject:
   - component: {fileID: 1176949402}
   - component: {fileID: 1176949401}
   - component: {fileID: 1176949405}
+  - component: {fileID: 1176949406}
   m_Layer: 0
   m_Name: Game Brain
   m_TagString: Untagged
@@ -14665,10 +14666,26 @@ MonoBehaviour:
   wolf3: {fileID: 1201878234}
   progressionScript: {fileID: 685651600}
   sounds: {fileID: 652437742}
-  phaseLengthsInMinutes: 0.2
+  phaseLengthsInMinutes: 1
   initialSheepDemand: 5
   sheepDemandScale: 1.5
   levelTimerScale: 1.25
+--- !u!114 &1176949406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176949400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.1590781, y: 0.88299096, z: 1.6060505}
+  m_Center: {x: -0.03061223, y: -0.05850464, z: -0.019655555}
+  m_Area: 3
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1178962931
 PrefabInstance:
   m_ObjectHideFlags: 0
