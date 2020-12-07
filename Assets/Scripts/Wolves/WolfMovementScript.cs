@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 // Movement system for the wolves.
 public class WolfMovementScript : MonoBehaviour
@@ -13,6 +13,8 @@ public class WolfMovementScript : MonoBehaviour
     public CharacterController controller;
 
     public Transform cam;
+
+    public TextMeshPro detainCountdown;
 
     float turnSmoothTime = 0.1f;
 
@@ -38,10 +40,18 @@ public class WolfMovementScript : MonoBehaviour
     // Show different animation for crouching and running
     bool isRunning = false;
 
+    public float detainDuration = 5f;
+
+    float detainTimer = 0f;
+
 
     bool isCrouching = false;
 
     bool isStandingStill = true; 
+
+    public GameObject detainSphere;
+
+    public bool isDetained = false;
 
     public float audibleRange = 10f;
 
@@ -52,6 +62,27 @@ public class WolfMovementScript : MonoBehaviour
     public void setUnderControl(bool controlled) {
         isUnderControl = controlled;
     }
+
+
+    void releaseDetain() {
+        isDetained = false;
+        detainTimer = 0;
+    }
+
+    void updateDetainTimer() {
+        detainCountdown.text = $"{Mathf.FloorToInt(detainDuration - detainTimer)}";
+    }
+
+    void tickDetainTimer() {
+        detainTimer += Time.deltaTime;
+        updateDetainTimer();
+        if (detainTimer >= detainDuration) {
+            releaseDetain();
+            detainCountdown.text = "";
+        }
+    }
+
+
 
 
     void Start() {
@@ -154,16 +185,21 @@ public class WolfMovementScript : MonoBehaviour
     // Update is called once per frame
     // Followed from https://www.youtube.com/watch?v=4HpC--2iowE
     void Update() {
-
-        if (isUnderControl) {
-            handleSprinting();
-            handleCrouching();
-            handleMoveDirection();
+        if (isDetained) {
+            detainSphere.SetActive(true);
+            tickDetainTimer();
         } else {
-            // Regenerate stamina passively when not in control.
-            isRunning = false;
-            isCrouching = false;
-            adjustStamina();
+            detainSphere.SetActive(false);
+            if (isUnderControl) {
+                handleSprinting();
+                handleCrouching();
+                handleMoveDirection();
+            } else {
+                // Regenerate stamina passively when not in control.
+                isRunning = false;
+                isCrouching = false;
+                adjustStamina();
+            }
         }
     }
 }

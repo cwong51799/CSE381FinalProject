@@ -35,6 +35,19 @@ public class CaptureSystem : MonoBehaviour
     }
 
 
+    float nearbyRadius = 30f;
+
+    private bool isWolvesNearby() {
+        // Search for nearby wolves, only return true if one is "nearby"
+        Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, nearbyRadius);
+        foreach (var hitCollider in hitColliders){
+            if(hitCollider.gameObject.tag == "Wolf") {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void Start() {
         NavMeshAgent agent = capturedSheep.GetComponent<NavMeshAgent>();
         capturedSheepAgentID = agent.agentTypeID;
@@ -42,7 +55,9 @@ public class CaptureSystem : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.tag == "FreeSheep") {
-            captureSheep(other.gameObject);
+            if (isWolvesNearby()) {
+                captureSheep(other.gameObject);
+            }
         }
     }
 }

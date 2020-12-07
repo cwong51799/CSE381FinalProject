@@ -25,6 +25,8 @@ public class FarmersRules : MonoBehaviour
 
     public GameObject farmer;
 
+    public GameObject farmerHelper1;
+
     public GameObject wolf1, wolf2, wolf3;
 
 
@@ -150,6 +152,11 @@ public class FarmersRules : MonoBehaviour
         farmerReleased = true;
         updateUIForFarmer();
         farmer.SetActive(true);
+        releaseHelper1();
+    }
+
+    void releaseHelper1() {
+        farmerHelper1.SetActive(true);
     }
 
     public void updateWolfConsumationCount() {
@@ -171,6 +178,14 @@ public class FarmersRules : MonoBehaviour
         }
     }
 
+    void checkForGameEnd() {
+        GameObject[] wolves = GameObject.FindGameObjectsWithTag("Wolf");
+        if (wolves.Length == 0) {
+            playerLosesTheGame();
+            setGameEnded(true);
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -188,6 +203,7 @@ public class FarmersRules : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkForGameEnd();
         if (!farmerReleased) {
             timer += Time.deltaTime;
             checkForPhaseUpdate();

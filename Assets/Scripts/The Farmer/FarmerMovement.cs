@@ -16,53 +16,9 @@ public class FarmerMovement : MonoBehaviour
 
     public float updateFrequency = 20;
 
-    GameObject target;
-
-    // For updating the camera when a wolf dies.
-    public WolfSwapper swapper;
-
-    public float attackRadius;
+    public GameObject target;
 
     public FarmersRules gameSystem;
-
-    public SoundContainer sounds;
-
-
-    void makeTheWolvesPrey() {
-        foreach(GameObject wolf in wolves) {
-            // If a wolf is level 4, it CANNOT be killed.
-            if (wolf.GetComponent<WolfProgression>().getWolfLevel() < 4) {
-                wolf.AddComponent<Prey>();
-            }
-        }        
-    }
-
-
-    void swing() {
-        Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, attackRadius);
-        // Search for nearby prey
-        foreach (var hitCollider in hitColliders){
-            // THE FARMER WILL RAVAGE ALL THINGS. EVEN SHEEP (which makes it even harder for you to grow while being chased!)
-            Prey script = hitCollider.gameObject.GetComponent<Prey>();
-            if(script && script.gameObject != this.gameObject) {
-                // Get eaten if your a prey.
-                script.getEaten();
-                if(hitCollider.gameObject.tag == "Wolf") {
-                    // If the tag is wolf, a wolf just died. Find the next target.
-                    sounds.wolfDeathSound.Play();
-                    target = findNextTarget();
-                    if (target) {
-                        swapper.setControlTo(target);
-                    } else {
-                        // Player loses the game
-                        gameSystem.playerLosesTheGame();
-                        gameSystem.setGameEnded(true);
-                    }
-                }
-            }
-        }
-    }
-
 
     GameObject searchForWolves() {
         // Look first, then listen if nothing is found.
@@ -76,7 +32,7 @@ public class FarmerMovement : MonoBehaviour
     GameObject lookForWolves() {
         foreach(var wolf in wolves) {
             // Check if it's been destroyed
-            if (wolf != null) {
+            if (wolf != null && !wolf.gameObject.GetComponent<WolfMovementScript>().isDetained) {
                 if (isWolfInFrustum(wolf)) {
                     return wolf;
                 }
@@ -89,7 +45,7 @@ public class FarmerMovement : MonoBehaviour
     GameObject listenForWolves() {
         foreach(var wolf in wolves) {
             if (wolf != null) {
-                if (isWolfAudible(wolf)) {
+                if (isWolfAudible(wolf) && !wolf.gameObject.GetComponent<WolfMovementScript>().isDetained) {
                     if(wolf.GetComponent<WolfMovementScript>().isAudible()) {
                         return wolf;
                     }
@@ -128,7 +84,6 @@ public class FarmerMovement : MonoBehaviour
         var rayDirection = wolf.transform.position - this.gameObject.transform.position;
         if (Physics.Raycast (this.gameObject.transform.position, rayDirection, out hit)) {
             if (hit.transform == wolf.transform) {
-                //Debug.Log("WOLF IS VISIBLE");
                 return true;
             } else {
                 //Debug.Log("WOLF IS OCCLUDED");
@@ -139,10 +94,11 @@ public class FarmerMovement : MonoBehaviour
 
 
     // If there are no more targets available, the player loses. (If this returns null)
-    GameObject findNextTarget() {
+    public GameObject findNextTarget() {
         foreach(GameObject wolf in wolves) {
             // If the wolf is alive
-            if (wolf.gameObject.GetComponent<WolfProgression>().isAlive) {
+            if (wolf.gameObject.GetComponent<WolfProgression>().isAlive && !wolf.gameObject.GetComponent<WolfMovementScript>().isDetained) {
+                target = wolf;
                 return wolf;
             }
         }
@@ -160,7 +116,6 @@ public class FarmerMovement : MonoBehaviour
     {
         target = wolf1;
         wolves = new GameObject[] {wolf1, wolf2, wolf3};
-        makeTheWolvesPrey();
         if(!gameSystem.getGameEnded()) {
             InvokeRepeating("huntTheWolves", 0, updateFrequency);
         }
@@ -169,11 +124,12 @@ public class FarmerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log($" {gameObject.name}'s target = {target}");
         GameObject wolfSensed = searchForWolves();
         if(wolfSensed != null) {
             target = wolfSensed;
+            // Continuously update position IF it senses one (run the wolf down)
             huntTheWolves();
         }
-        swing();
     }
 }
