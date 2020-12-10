@@ -5064,9 +5064,9 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_HDR: 0
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -7977,6 +7977,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Running 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1536800285556208697, guid: d284d4ee6e1c0954b9c010bb32dbc0f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -3846018093981099296, guid: 8235934db0826fb40a35d880bac49d27, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d284d4ee6e1c0954b9c010bb32dbc0f3, type: 3}
 --- !u!1 &652437741
@@ -8570,10 +8574,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 022271daf1210034bb23d3985a499c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level1Threshold: 5
-  Level2Threshold: 15
-  Level3Threshold: 30
-  Level4Threshold: 45
+  Level1Threshold: 2
+  Level2Threshold: 4
+  Level3Threshold: 6
+  Level4Threshold: 8
   levelScaleFactor: 1.25
   sounds: {fileID: 652437742}
 --- !u!4 &685651601
@@ -10162,7 +10166,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771813194}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11011,6 +11015,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SHEEP (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9c766c0520b98184d85f0a0939c0376f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3207183532384534622, guid: 9c766c0520b98184d85f0a0939c0376f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.035
@@ -11141,7 +11149,7 @@ MonoBehaviour:
   controller: {fileID: 875044271}
   cam: {fileID: 422017221}
   detainCountdown: {fileID: 952987619}
-  baseSpeed: 30
+  baseSpeed: 15
   movingSpeed: 0
   maxStamina: 100
   currentStamina: 0
@@ -14789,7 +14797,7 @@ MonoBehaviour:
   jumpingSheepToCreate: {fileID: 1479497203}
   initialNumberOfSheep: 30
   initialNumberOfJumpingSheep: 3
-  sheepSpawnFrequency: 30
+  sheepSpawnFrequency: 1
   amountOfPlainSheepPerSpawn: 30
   amountOfJumpingSheepPerSpawn: 3
   MAX_AMOUNT_OF_FREE_SHEEP: 100
@@ -15232,8 +15240,8 @@ MonoBehaviour:
   wolf3: {fileID: 1201878234}
   progressionScript: {fileID: 685651600}
   sounds: {fileID: 652437742}
-  phaseLengthsInMinutes: 51
-  initialSheepDemand: 5
+  phaseLengthsInMinutes: 0.5
+  initialSheepDemand: 2
   sheepDemandScale: 1.5
   levelTimerScale: 1.25
 --- !u!114 &1176949406
@@ -16121,7 +16129,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237181436}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -20657,7 +20665,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564286061}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -21156,7 +21164,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610089103}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

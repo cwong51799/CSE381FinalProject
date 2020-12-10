@@ -64,6 +64,7 @@ public class SheepSpawner : MonoBehaviour
     void spawnPlainSheep(int amount) {
          for (var i=0;i<amount;i++) {
              if(!shouldSpawnSheep()) {
+                Debug.Log("TOO MANY SHEEP!");
                 return;
              }
              spawnASheep(plainSheepToCreate);
@@ -73,6 +74,7 @@ public class SheepSpawner : MonoBehaviour
     void spawnJumpingSheep(int amount) {
         for (var i=0;i<amount;i++) {
              if(!shouldSpawnSheep()) {
+                Debug.Log("TOO MANY SHEEP!");
                 return;
              }
              spawnASheep(jumpingSheepToCreate);
