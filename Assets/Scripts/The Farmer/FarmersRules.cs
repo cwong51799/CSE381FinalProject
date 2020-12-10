@@ -213,7 +213,7 @@ public class FarmersRules : MonoBehaviour
     void Update()
     {
         if(!gameEnded) {
-            checkForGameEnd();
+                checkForGameEnd();
         }
         if (!farmerReleased) {
             timer += Time.deltaTime;

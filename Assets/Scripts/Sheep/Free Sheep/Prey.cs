@@ -18,6 +18,7 @@ public class Prey : MonoBehaviour
         if(this.gameObject.tag == "FreeSheep") {
             this.gameObject.SetActive(false);
             this.gameObject.GetComponent<FreeSheepMovement>().keepPathing = false;
+            this.gameObject.GetComponent<FreeSheepMovement>().agent.enabled = false;
         }
         if(this.gameObject.tag == "Wolf") {
             WolfStatus script = this.gameObject.GetComponent<WolfStatus>();
