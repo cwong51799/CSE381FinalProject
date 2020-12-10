@@ -27,6 +27,8 @@ public class WolfMovement : MonoBehaviour
     public float baseSpeed = 10;
 
     public float movingSpeed;
+
+    private Animator anim;
     
     // Make some of these private later on.
 
@@ -90,7 +92,7 @@ public class WolfMovement : MonoBehaviour
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
         currentStamina = maxStamina;
-        movingSpeed = baseSpeed;
+        movingSpeed = baseSpeed;  
     }
     
 
@@ -163,6 +165,8 @@ public class WolfMovement : MonoBehaviour
         }
     }
 
+
+
     void handleMoveDirection() {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -179,14 +183,17 @@ public class WolfMovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * movingSpeed * Time.deltaTime);
+            anim.SetBool("isRunning",true);
         } else {
             isStandingStill = true;
+            anim.SetBool("isRunning",false);
         }
     }
 
     // Update is called once per frame
     // Followed from https://www.youtube.com/watch?v=4HpC--2iowE
     void Update() {
+        anim = GetComponent<Animator>(); 
         if (isDetained) {
             detainSphere.SetActive(true);
             tickDetainTimer();
