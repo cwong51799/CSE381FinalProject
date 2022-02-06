@@ -121,7 +121,7 @@ public class WolfMovement : MonoBehaviour
 
     void adjustMovespeed() {
         if(isRunning) {
-            movingSpeed = baseSpeed * 2;
+            movingSpeed = baseSpeed * 1.3f;
         } else {
             movingSpeed = baseSpeed;
         }

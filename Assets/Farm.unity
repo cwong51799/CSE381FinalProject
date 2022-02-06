@@ -4985,7 +4985,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422017220}
-  m_LocalRotation: {x: -0.05380188, y: 0.898772, z: -0.115253046, w: -0.41956052}
+  m_LocalRotation: {x: -0.053801876, y: 0.898772, z: -0.115253046, w: -0.41956052}
   m_LocalPosition: {x: -36.606735, y: 11.713011, z: -10.756399}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7650,8 +7650,8 @@ MonoBehaviour:
   movingSpeed: 0
   maxStamina: 50
   currentStamina: 0
-  staminaRegenRate: 15
-  staminaDepletionRate: 10
+  staminaRegenRate: 100
+  staminaDepletionRate: 1
   detainDuration: 5
   detainSphere: {fileID: 2028682011}
   isDetained: 0
@@ -8545,7 +8545,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675003190}
-  m_LocalRotation: {x: -0.046181582, y: 0.90071493, z: -0.09892903, w: -0.4204675}
+  m_LocalRotation: {x: -0.046181586, y: 0.900715, z: -0.09892903, w: -0.42046753}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9057,12 +9057,12 @@ MonoBehaviour:
 
     SHIFT - Run
 
-    Ctrl - Crouch
+    C - Sneak
 
-    E
-    - Consume
+    E -
+    Eat Sheep
 
-    F - Bark
+    F - Bark (scare sheep)
 
     Q - Hunter Vision
 
@@ -9427,7 +9427,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722750241}
-  m_LocalRotation: {x: -0.053801876, y: 0.898772, z: -0.115253046, w: -0.41956046}
+  m_LocalRotation: {x: -0.053801876, y: 0.898772, z: -0.11525304, w: -0.41956046}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11255,8 +11255,8 @@ MonoBehaviour:
   movingSpeed: 0
   maxStamina: 100
   currentStamina: 0
-  staminaRegenRate: 15
-  staminaDepletionRate: 10
+  staminaRegenRate: 100
+  staminaDepletionRate: 1
   detainDuration: 5
   detainSphere: {fileID: 700300612}
   isDetained: 0
@@ -15345,7 +15345,7 @@ MonoBehaviour:
   wolf3: {fileID: 1201878234}
   progressionScript: {fileID: 685651600}
   sounds: {fileID: 652437742}
-  phaseLengthsInMinutes: 0.1
+  phaseLengthsInMinutes: 0.4
   initialSheepDemand: 4
   sheepDemandScale: 1.5
   levelTimerScale: 1.25
