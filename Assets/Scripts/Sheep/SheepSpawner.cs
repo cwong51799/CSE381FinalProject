@@ -13,7 +13,7 @@ public class SheepSpawner : MonoBehaviour
     
     public GameObject jumpingSheepToCreate;
 
-    public int initialNumberOfSheep = 30;
+    public int initialNumberOfSheep = 500;
 
     public int initialNumberOfJumpingSheep = 5;
 
@@ -23,7 +23,9 @@ public class SheepSpawner : MonoBehaviour
 
     public int amountOfJumpingSheepPerSpawn = 5;
 
-    public float MAX_AMOUNT_OF_FREE_SHEEP = 100;
+    public float MAX_AMOUNT_OF_FREE_SHEEP = 10000;
+
+    private GameObject sheepParent;
 
 
     // Probably have a max amount of sheep
@@ -31,8 +33,8 @@ public class SheepSpawner : MonoBehaviour
 
     // Count the amount of free sheep.
     bool shouldSpawnSheep(){
-        GameObject[] freesheeps = GameObject.FindGameObjectsWithTag("FreeSheep");
-        if(freesheeps.Length < MAX_AMOUNT_OF_FREE_SHEEP) {
+        Debug.Log(sheepParent.transform.childCount);
+        if(sheepParent.transform.childCount < MAX_AMOUNT_OF_FREE_SHEEP) {
             return true;
         } else {
             return false;
@@ -56,6 +58,7 @@ public class SheepSpawner : MonoBehaviour
         Vector3 location = pickARandomLocation();
         GameObject newSheep = Instantiate(sheepToSpawn, location, Random.rotation);
         newSheep.GetComponent<TargettingBeamContainer>().targettingBeam.SetActive(false);
+        newSheep.transform.parent = sheepParent.transform;
         newSheep.SetActive(true);
     }
 
@@ -63,35 +66,31 @@ public class SheepSpawner : MonoBehaviour
 
     void spawnPlainSheep(int amount) {
          for (var i=0;i<amount;i++) {
-             if(!shouldSpawnSheep()) {
-                return;
-             }
              spawnASheep(plainSheepToCreate);
          }
     }
 
     void spawnJumpingSheep(int amount) {
         for (var i=0;i<amount;i++) {
-             if(!shouldSpawnSheep()) {
-                return;
-             }
              spawnASheep(jumpingSheepToCreate);
          }
     }
 
 
     void periodicallySpawnSheep() {
-        spawnJumpingSheep(amountOfJumpingSheepPerSpawn);
-        spawnPlainSheep(amountOfPlainSheepPerSpawn);
-
+        if (shouldSpawnSheep()) {
+            spawnJumpingSheep(amountOfJumpingSheepPerSpawn);
+            spawnPlainSheep(amountOfPlainSheepPerSpawn);
+        }
     }
 
 
     // Start is called before the first frame update
     void Start()
     {   
+        sheepParent = GameObject.Find("SheepParent");
         spawnPlainSheep(initialNumberOfSheep);
         spawnJumpingSheep(initialNumberOfJumpingSheep);
-        InvokeRepeating("periodicallySpawnSheep", 0, sheepSpawnFrequency);
+        InvokeRepeating("periodicallySpawnSheep", 20, sheepSpawnFrequency);
     }
 }
