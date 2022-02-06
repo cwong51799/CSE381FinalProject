@@ -33,7 +33,6 @@ public class SheepSpawner : MonoBehaviour
 
     // Count the amount of free sheep.
     bool shouldSpawnSheep(){
-        Debug.Log(sheepParent.transform.childCount);
         if(sheepParent.transform.childCount < MAX_AMOUNT_OF_FREE_SHEEP) {
             return true;
         } else {

@@ -4985,7 +4985,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422017220}
-  m_LocalRotation: {x: -0.053801876, y: 0.898772, z: -0.115253046, w: -0.41956052}
+  m_LocalRotation: {x: -0.05380188, y: 0.898772, z: -0.115253046, w: -0.41956052}
   m_LocalPosition: {x: -36.606735, y: 11.713011, z: -10.756399}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -9427,7 +9427,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722750241}
-  m_LocalRotation: {x: -0.053801876, y: 0.898772, z: -0.11525304, w: -0.41956046}
+  m_LocalRotation: {x: -0.053801876, y: 0.898772, z: -0.115253046, w: -0.41956046}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14900,11 +14900,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plainSheepToCreate: {fileID: 2114670204}
   jumpingSheepToCreate: {fileID: 1479497203}
-  initialNumberOfSheep: 20
+  initialNumberOfSheep: 60
   initialNumberOfJumpingSheep: 3
   sheepSpawnFrequency: 5
   amountOfPlainSheepPerSpawn: 15
-  amountOfJumpingSheepPerSpawn: 3
+  amountOfJumpingSheepPerSpawn: 5
   MAX_AMOUNT_OF_FREE_SHEEP: 100
 --- !u!4 &1123105655
 Transform:
@@ -15345,7 +15345,7 @@ MonoBehaviour:
   wolf3: {fileID: 1201878234}
   progressionScript: {fileID: 685651600}
   sounds: {fileID: 652437742}
-  phaseLengthsInMinutes: 0.5
+  phaseLengthsInMinutes: 0.1
   initialSheepDemand: 4
   sheepDemandScale: 1.5
   levelTimerScale: 1.25
@@ -19438,7 +19438,6 @@ GameObject:
   - component: {fileID: 1479497210}
   - component: {fileID: 1479497209}
   - component: {fileID: 1479497208}
-  - component: {fileID: 1479497207}
   - component: {fileID: 1479497204}
   - component: {fileID: 1479497205}
   - component: {fileID: 1479497206}
@@ -19448,7 +19447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!143 &1479497204
 CharacterController:
   m_ObjectHideFlags: 0
@@ -19495,22 +19494,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targettingBeam: {fileID: 1398215183}
---- !u!54 &1479497207
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479497203}
-  serializedVersion: 2
-  m_Mass: 100000000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &1479497208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19553,7 +19536,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479497203}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbdac7276b160cd448a937e0863e5928, type: 3}
   m_Name: 
@@ -26944,8 +26927,8 @@ GameObject:
   - component: {fileID: 2114670209}
   - component: {fileID: 2114670211}
   - component: {fileID: 2114670212}
-  - component: {fileID: 2114670210}
   - component: {fileID: 2114670206}
+  - component: {fileID: 2114670207}
   m_Layer: 8
   m_Name: Sheep
   m_TagString: FreeSheep
@@ -26979,6 +26962,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targettingBeam: {fileID: 940721876}
+--- !u!54 &2114670207
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114670204}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!4 &2114670208
 Transform:
   m_ObjectHideFlags: 0
@@ -27003,7 +27002,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114670204}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbdac7276b160cd448a937e0863e5928, type: 3}
   m_Name: 
@@ -27023,22 +27022,6 @@ MonoBehaviour:
   scaredColor: {fileID: 2100000, guid: 2f26f8dd707476e4abb28042acba10cb, type: 2}
   startleRadius: 20
   jumpScript: {fileID: 0}
---- !u!54 &2114670210
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114670204}
-  serializedVersion: 2
-  m_Mass: 100000000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 3
 --- !u!195 &2114670211
 NavMeshAgent:
   m_ObjectHideFlags: 0
