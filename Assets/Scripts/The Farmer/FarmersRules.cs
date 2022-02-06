@@ -199,8 +199,7 @@ public class FarmersRules : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 1;
+        QualitySettings.vSyncCount = 0;
         captureSystem = captureObject.GetComponent<CaptureSystem>();
         // Convert all the timers to seconds.
         phaseLengthsInMinutes = phaseLengthsInMinutes * minutesToSeconds;
